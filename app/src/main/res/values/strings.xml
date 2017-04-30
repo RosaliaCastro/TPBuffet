@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TpBuffet</string>
+    <string name="Registro">Registro de Usuario</string>
+    <string name="Bienvenido">Bienvenido a la primer aplicación</string>
+    <string name="BuffetUTN">Buffet-UTN</string>
+    <string name="mail">Mail</string>
+    <string name="Clave">Clave</string>
+    <string name="Ingresar">Ingresar</string>
+    <string name="o">O</string>
+    <string name="Registrar">Registrar</string>
+    <string name="Recordarme">Recordarme</string>
+</resources>
