@@ -1,7 +1,13 @@
-package com.example.rosalia.tpbuffet;
+package com.example.rosalia.tpbuffet.Log_in.Log_in;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
+import com.example.rosalia.tpbuffet.*;
+import com.example.rosalia.tpbuffet.Log_in.Registro.Registro;
+import com.example.rosalia.tpbuffet.R;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
  * Created by Jona on 30/04/2017.
@@ -41,19 +47,36 @@ public class ControladorLog_in implements View.OnClickListener {
         return  res;
 
     }
-
+    private void startActivity(Intent intent) {
+        myActivity.startActivity(intent);
+    }
     @Override
-    public void onClick(View view) {
-        if (view.getId()== R.id.btnIngresar){
+    public void onClick(View view)
+    {
+        if (view.getId()== R.id.btnIngresar)
+        {
             String mail = vistaLog_in.mail.getText().toString();
             String clave= vistaLog_in.clave.getText().toString();
-            if (validarCampo(mail, clave)){
-                if (validarMail(mail)){
+
+            if (validarCampo(mail, clave))
+            {
+                if (validarMail(mail))
+                {
                     vistaLog_in.limpiar();
                 }
-                }
             }
+        }else if(view.getId() == R.id.btnRegistrarme)
+        {
+            Intent intent2 = new Intent(myActivity, Registro.class);
+            myActivity.startActivity(intent2);
         }
-
     }
+
+
+
+
+}
+
+
+
 

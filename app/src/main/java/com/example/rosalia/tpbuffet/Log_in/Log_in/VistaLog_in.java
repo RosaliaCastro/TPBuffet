@@ -1,10 +1,13 @@
-package com.example.rosalia.tpbuffet;
+package com.example.rosalia.tpbuffet.Log_in.Log_in;
 
 import android.app.Activity;
-import android.icu.text.DateFormat;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+
+import com.example.rosalia.tpbuffet.Log_in.Log_in.Log_in;
+import com.example.rosalia.tpbuffet.Log_in.Log_in.ModeloLog_in;
+import com.example.rosalia.tpbuffet.R;
 
 /**
  * Created by Jona on 30/04/2017.
@@ -17,7 +20,7 @@ public class VistaLog_in {
     Button registrarme;
     CheckBox recordarme;
 
-    public VistaLog_in (ModeloLog_in modeloLog_in, ControladorLog_in controladorLog_in, Activity myActivity){
+    public VistaLog_in (ModeloLog_in modeloLog_in,ControladorLog_in controladorLog_in, Activity myActivity){
         this.modeloLog_in=modeloLog_in;
         mail= (EditText)myActivity.findViewById(R.id.txtMail);
         clave= (EditText)myActivity.findViewById(R.id.txtClave);

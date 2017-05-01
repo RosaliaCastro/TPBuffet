@@ -10,4 +10,10 @@
     <string name="o">Or</string>
     <string name="Registrar">Registrer </string>
     <string name="Recordarme">Remember</string>
+    <string name="Estaes">This is the registration screen.</string>
+    <string name="PorFavor">Please enter real data.</string>
+    <string name="Nombre">Name</string>
+    <string name="Apellido">Last name</string>
+    <string name="DNI">DNI</string>
+    <string name="Reingrese">Reentry</string>
 </resources>

@@ -1,7 +1,9 @@
-package com.example.rosalia.tpbuffet;
+package com.example.rosalia.tpbuffet.Log_in.Log_in;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.rosalia.tpbuffet.R;
 
 public class Log_in extends AppCompatActivity {
 

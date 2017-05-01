@@ -7,6 +7,13 @@
     <string name="Clave">Clave</string>
     <string name="Ingresar">Ingresar</string>
     <string name="o">O</string>
-    <string name="Registrar">Registrar</string>
+    <string name="Registrar">Registrarme</string>
     <string name="Recordarme">Recordarme</string>
+    <string name="Estaes">Esta es la pantalla de registro.</string>
+    <string name="PorFavor">Por favor ingrese datos verdaderos.</string>
+    <string name="Nombre">Nombre</string>
+    <string name="Apellido">Apellido</string>
+    <string name="DNI">DNI</string>
+    <string name="Reingrese">Reingrese</string>
+
 </resources>
