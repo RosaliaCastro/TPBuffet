@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Log_in.Registro.Registro"></activity>
+        <activity android:name=".Log_in.Menu.Menu"></activity>
     </application>
 
 </manifest>

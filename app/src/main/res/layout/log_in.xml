@@ -8,7 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".Log_in.Log_in.Log_in"
-    android:background="@drawable/fondo2"
+    android:background="@color/fondo"
     >
 <LinearLayout
     android:layout_width="match_parent"
@@ -57,8 +57,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/mail"
+            android:hint="@string/mails"
+            android:textColorHint="@color/colorPrimary"
             android:id="@+id/txtMail"
+            android:textStyle="italic"
             android:textColor="@color/colorLetra"
             android:inputType="textEmailAddress"
             />
@@ -77,10 +79,12 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Clave"
+            android:hint="@string/Claves"
+            android:textColorHint="@color/colorPrimary"
             android:inputType="textPassword"
             android:id="@+id/txtClave"
-            android:textColor="@color/colorLetra"
+            android:textStyle="italic"
+            android:textColor="@color/colorPrimary"
             />
     </LinearLayout>
 <Button
@@ -91,7 +95,7 @@
     android:layout_gravity="center"
     android:id="@+id/btnIngresar"
     android:textColor="@color/colorLetra"
-    android:background="@color/colorPrimary"/>
+    android:background="@color/colorPrimaryDark"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,7 +112,7 @@
         android:layout_gravity="center"
         android:id="@+id/btnRegistrarme"
         android:textColor="@color/colorLetra"
-        android:background="@color/colorPrimary"/>
+        android:background="@color/colorPrimaryDark"/>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

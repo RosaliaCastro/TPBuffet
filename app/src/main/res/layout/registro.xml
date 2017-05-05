@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/fondo2">
+    android:background="@color/fondo">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Registro"
+            android:padding="10dp"
             android:gravity="center"
             android:layout_gravity="center"
             android:textStyle="bold"
@@ -19,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Estaes"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:textColor="@color/colorLetra"/>
@@ -39,12 +41,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Nombre"
+                android:padding="10dp"
                 android:textColor="@color/colorLetra"
                 android:textStyle="bold"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/Nombre"
+                android:hint="@string/Nombres"
+                android:inputType="text"
+                android:textColorHint="@color/colorPrimary"
+                android:textStyle="italic"
                 android:id="@+id/txtNombre"
                 android:textColor="@color/colorLetra"
                 />
@@ -58,12 +64,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/Apellido"
+                android:padding="10dp"
                 android:textColor="@color/colorLetra"
                 android:textStyle="bold"/>
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/Apellido"
+                android:hint="@string/Apellidos"
+                android:inputType="text"
+                android:textColorHint="@color/colorPrimary"
+                android:textStyle="italic"
                 android:id="@+id/txtApellido"
                 android:textColor="@color/colorLetra"
                 />
@@ -76,12 +86,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/DNI"
+            android:padding="10dp"
             android:textColor="@color/colorLetra"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/DNI"
+            android:hint="@string/DNIS"
+
+            android:textColorHint="@color/colorPrimary"
+            android:textStyle="italic"
             android:id="@+id/txtDni"
             android:inputType="number"
             android:textColor="@color/colorLetra"
@@ -95,13 +109,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mail"
+            android:padding="10dp"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorLetra"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/mail"
+            android:hint="@string/mails"
+            android:textStyle="italic"
+            android:textColorHint="@color/colorPrimary"
             android:id="@+id/txtMail2"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorLetra"
@@ -115,12 +132,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Clave"
+            android:padding="10dp"
             android:textColor="@color/colorLetra"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Clave"
+            android:hint="@string/Claves"
+            android:textStyle="italic"
+            android:textColorHint="@color/colorPrimary"
             android:id="@+id/txtClave2"
             android:inputType="textPassword"
             android:textColor="@color/colorLetra"
@@ -134,12 +154,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Reingrese"
+            android:padding="10dp"
             android:textColor="@color/colorLetra"
             android:textStyle="bold"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/Reingrese"
+            android:hint="@string/Reingreses"
+            android:textStyle="italic"
+            android:textColorHint="@color/colorPrimary"
             android:id="@+id/txtReingrese"
             android:inputType="textPassword"
             android:textColor="@color/colorLetra"
@@ -150,10 +173,11 @@
             android:layout_height="wrap_content"
             android:text="@string/Registrar"
             android:gravity="center"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:id="@+id/btnRegistrarme2"
             android:textColor="@color/colorLetra"
-            android:background="@color/colorPrimary"/>
+            android:background="@color/colorPrimaryDark"/>
 
 
     </LinearLayout>

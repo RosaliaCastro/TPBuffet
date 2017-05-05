@@ -1,19 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">TpBuffet</string>
+    <string name="nameLayaout1">Log_in</string>
+    <string name="nameLayaout2">Registro</string>
+    <string name="nameLayaout3">Menu</string>
+    <string name="nameLayaout4">Pedido</string>
     <string name="Registro">User Registration</string>
     <string name="Bienvenido">Welcom to the first application</string>
     <string name="BuffetUTN">Buffet-UTN</string>
-    <string name="mail">Mail</string>
-    <string name="Clave">Password</string>
-    <string name="Ingresar">Enter</string>
+    <string name="mail">Mail: </string>
+    <string name="mails">mail </string>
+    <string name="Clave">Password: </string>
+    <string name="Claves">password </string>
+    <string name="Ingresar">Enter </string>
     <string name="o">Or</string>
     <string name="Registrar">Registrer </string>
     <string name="Recordarme">Remember</string>
     <string name="Estaes">This is the registration screen.</string>
     <string name="PorFavor">Please enter real data.</string>
-    <string name="Nombre">Name</string>
-    <string name="Apellido">Last name</string>
-    <string name="DNI">DNI</string>
-    <string name="Reingrese">Reentry</string>
+    <string name="Nombre">Name: </string>
+    <string name="Nombres">name </string>
+    <string name="Apellido">Last name: </string>
+    <string name="Apellidos">last name</string>
+    <string name="DNI">DNI: </string>
+    <string name="DNIS">dni </string>
+    <string name="Reingrese">Reentry: </string>
+    <string name="Reingreses">reenter key</string>
+    <string name="Pidiendo">Asking...</string>
+    <string name="Importe">Estimated amount</string>
+    <string name="Elementos">Selected items: </string>
+    <string name="Enviar">Send the order</string>
+    <string name="Cafe">Cofee / Drinks</string>
+    <string name="Menu">Menu`s</string>
+    <string name="Snaks">Snaks</string>
+    <string name="porcion">Piece of Pizza</string>
+    <string name="valor">15.50</string>
+    <string name="munuPedido">View order</string>
+    <string name="menuSalir">Get out</string>
 </resources>
