@@ -1,4 +1,4 @@
-package com.example.rosalia.tpbuffet.Log_in.Menu;
+package com.example.rosalia.tpbuffet.Log_in.Pedido;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,20 +8,21 @@ import com.example.rosalia.tpbuffet.Log_in.MyOnItemClick;
 import com.example.rosalia.tpbuffet.R;
 
 /**
- * Created by Jona on 02/05/2017.
+ * Created by Jona on 06/05/2017.
  */
-public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    TextView txtDescripcion;
-    TextView txtPrecio;
+public class MyViewHolderPedido extends RecyclerView.ViewHolder implements View.OnClickListener {
+    TextView txtDescripcionPedido;
+    TextView txtPrecioPedido;
     private MyOnItemClick listener;
     private int position;
 
-    public MyViewHolder(View itemView, MyOnItemClick listener) {
+    public MyViewHolderPedido(View itemView, MyOnItemClick listener) {
         super(itemView);
-        txtDescripcion=(TextView)itemView.findViewById(R.id.txtDescripcion);
-        txtPrecio=(TextView)itemView.findViewById(R.id.txtPrecio);
+        txtDescripcionPedido=(TextView)itemView.findViewById(R.id.txtDescripcionPedido);
+        txtPrecioPedido=(TextView)itemView.findViewById(R.id.txtPrecioPedido);
         itemView.setOnClickListener(this);
         this.listener=listener;
+
     }
 
     @Override

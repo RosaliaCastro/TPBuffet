@@ -36,4 +36,8 @@
     <string name="valor">15.50</string>
     <string name="munuPedido">Ver Pedido</string>
     <string name="menuSalir">Cerrar Sesion</string>
+    <string name="Pedido">Mi Pedido</string>
+    <string name="menuEnviar">Enviar Pedido Actual</string>
+    <string name="menuLimpiar">Limpiar Pedido</string>
+
 </resources>

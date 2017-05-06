@@ -37,4 +37,7 @@
     <string name="valor">15.50</string>
     <string name="munuPedido">View order</string>
     <string name="menuSalir">Get out</string>
+    <string name="Pedido">My Order</string>
+    <string name="menuEnviar">Send current order</string>
+    <string name="menuLimpiar">Delete Order</string>
 </resources>

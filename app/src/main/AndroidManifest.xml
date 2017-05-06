@@ -17,6 +17,10 @@
         </activity>
         <activity android:name=".Log_in.Registro.Registro"></activity>
         <activity android:name=".Log_in.Menu.Menu"></activity>
+        <activity android:name=".Log_in.Pedido.Pedido"></activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

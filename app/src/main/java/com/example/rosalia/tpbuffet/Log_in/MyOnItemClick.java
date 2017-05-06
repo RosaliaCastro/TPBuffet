@@ -1,4 +1,4 @@
-package com.example.rosalia.tpbuffet.Log_in.Menu;
+package com.example.rosalia.tpbuffet.Log_in;
 
 import android.view.MenuItem;
 
