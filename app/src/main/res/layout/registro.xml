@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/fondo">
 
         <TextView
@@ -49,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/Nombres"
                 android:inputType="text"
+                android:focusable="true"
                 android:textColorHint="@color/colorPrimary"
                 android:textStyle="italic"
                 android:id="@+id/txtNombre"
@@ -93,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="@string/DNIS"
-
+            android:maxLength="8"
             android:textColorHint="@color/colorPrimary"
             android:textStyle="italic"
             android:id="@+id/txtDni"
@@ -137,7 +138,7 @@
             android:textStyle="bold"/>
         <EditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:hint="@string/Claves"
             android:textStyle="italic"
             android:textColorHint="@color/colorPrimary"
@@ -173,7 +174,7 @@
             android:layout_height="wrap_content"
             android:text="@string/Registrar"
             android:gravity="center"
-            android:padding="10dp"
+            android:padding="15dp"
             android:layout_gravity="center"
             android:id="@+id/btnRegistrarme2"
             android:textColor="@color/colorLetra"

@@ -6,14 +6,14 @@ package com.example.rosalia.tpbuffet.Log_in.Registro;
 public class ModeloRegistro {
     private String nombre;
     private String apellido;
-    private Integer dni;
+    private String dni;
     private String mail;
     private String clave;
     private String reingrese;
 
     public ModeloRegistro(){}
 
-    public ModeloRegistro(String nombre, String apellido, Integer dni, String mail,String clave,String reingrese){
+    public ModeloRegistro(String nombre, String apellido, String dni, String mail,String clave,String reingrese){
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
@@ -28,7 +28,7 @@ public class ModeloRegistro {
     public String getApellido() {
         return apellido;
     }
-    public Integer getDni() {
+    public String getDni() {
         return dni;
     }
     public String getMail() {
@@ -49,7 +49,7 @@ public class ModeloRegistro {
         this.apellido = apellido;
     }
 
-    public void setDni(Integer dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 

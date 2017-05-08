@@ -31,13 +31,6 @@ public class VistaLog_in {
         registrarme.setOnClickListener(controladorLog_in);
     }
 
-   // public String traerMail(){
-    //return mail.getText().toString();
-//}
-  //  public String traerClavel(){
-    //    return clave.getText().toString();
-    //}
-
     public void limpiar(){
         mail.setText("");
         clave.setText("");

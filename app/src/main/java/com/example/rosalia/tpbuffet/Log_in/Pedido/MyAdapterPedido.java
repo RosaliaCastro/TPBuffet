@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.rosalia.tpbuffet.Log_in.Menu.ModeloMenu;
-import com.example.rosalia.tpbuffet.Log_in.Menu.MyAdapter;
-import com.example.rosalia.tpbuffet.Log_in.Menu.MyViewHolder;
-import com.example.rosalia.tpbuffet.Log_in.MyOnItemClick;
+import com.example.rosalia.tpbuffet.Log_in.Menu.MyOnItemClick;
 import com.example.rosalia.tpbuffet.R;
 
 import java.util.List;

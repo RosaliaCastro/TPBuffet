@@ -2,13 +2,14 @@ package com.example.rosalia.tpbuffet.Log_in.Pedido;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.example.rosalia.tpbuffet.R;
-import com.example.rosalia.tpbuffet.Log_in.MyOnItemClick;
+import com.example.rosalia.tpbuffet.Log_in.Menu.MyOnItemClick;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +17,16 @@ import java.util.List;
 /**
  * Created by Jona on 06/05/2017.
  */
-public class Pedido extends ActionBarActivity implements MyOnItemClick {
+public class Pedido extends AppCompatActivity implements MyOnItemClick {
 
     @Override
-    public boolean onCreateOptionMenu(Menu menu_pedido) {
+    public boolean onCreateOptionsMenu(Menu menu_pedido) {
         getMenuInflater().inflate(R.menu.menu_pedido, menu_pedido);
         return true;
     }
 
     @Override
-    public boolean onOptionItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menuEnviar) {
             Log.d("Menu", "menuEnviar");
@@ -47,13 +48,12 @@ public class Pedido extends ActionBarActivity implements MyOnItemClick {
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
-            //setContentView(R.layout.pedido);
             setContentView(R.layout.pedido);
 
-            // ModeloMenu modeloMenu1 =new ModeloMenu();
-            // ControladorMenu controladorMenu = new ControladorMenu(modeloMenu1, this);
-            // VistaMenu vistaMenu= new VistaMenu(modeloMenu1, controladorMenu,this);
-            // controladorMenu.setVistaMenu(vistaMenu);
+            ModeloPedido modeloPedido =new ModeloPedido();
+            ControladorPedido controladorPedido = new ControladorPedido(modeloPedido, this);
+            VistaPedido vistaPedido= new VistaPedido(modeloPedido, controladorPedido,this);
+            controladorPedido.setVistaPedido(vistaPedido);
 
             List<ModeloPedido> listaPedido = new ArrayList<ModeloPedido>();
             listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
