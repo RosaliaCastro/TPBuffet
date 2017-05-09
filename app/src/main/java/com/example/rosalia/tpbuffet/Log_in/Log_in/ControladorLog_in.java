@@ -2,8 +2,12 @@ package com.example.rosalia.tpbuffet.Log_in.Log_in;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
+import android.widget.CheckBox;
+
 import com.example.rosalia.tpbuffet.*;
 import com.example.rosalia.tpbuffet.Log_in.Menu.Menu;
 import com.example.rosalia.tpbuffet.Log_in.Registro.Registro;
@@ -23,7 +27,9 @@ public class ControladorLog_in implements View.OnClickListener {
     private VistaLog_in vistaLog_in;
     List<ModeloLog_in> ListaUsuarios;
 
-    public ControladorLog_in(){}
+    public ControladorLog_in() {
+    }
+
     public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, List<ModeloLog_in> listaUsuarios) {
         this.modeloLog_in = modeloLog_in;
         this.myActivity = myActivity;
@@ -68,11 +74,27 @@ public class ControladorLog_in implements View.OnClickListener {
         }
         return res;
     }
+    public void recordarme(){
+        SharedPreferences miPreferencia = myActivity.getSharedPreferences("miConfig", Context.MODE_PRIVATE);
+        CheckBox check = vistaLog_in.recordarme;
 
-    public void agregarNuevo(){
+        if (check.isChecked()){
+            String mail = vistaLog_in.mail.getText().toString();
+            String clave = vistaLog_in.clave.getText().toString();
+
+            SharedPreferences.Editor editor =miPreferencia.edit();
+            editor.putString("Mail",mail);
+            editor.putString("Clave",clave);
+            editor.commit();
+
+        }
+
+    }
+
+    public void agregarNuevo() {
         String dato1 = myActivity.getIntent().getExtras().getString("mail");
         String dato2 = myActivity.getIntent().getExtras().getString("clave");
-        ModeloLog_in nuevo = new ModeloLog_in(dato1,dato2);
+        ModeloLog_in nuevo = new ModeloLog_in(dato1, dato2);
         ListaUsuarios.add(nuevo);
     }
 
@@ -96,17 +118,21 @@ public class ControladorLog_in implements View.OnClickListener {
                 if (validarMail(mail)) {
                     ModeloLog_in usuario = new ModeloLog_in(mail, clave);
                     if (validarUsuario(usuario)) {
+                        recordarme();
                         Intent intentMenu = new Intent(myActivity, Menu.class);
                         myActivity.startActivity(intentMenu);
-                    } else{
-                      dialogo3.show(myActivity.getFragmentManager(),"Alerta3");
-                      dialogo3.setMensaje("El usuario no existe.");}
-                } else{
-                   dialogo2.show(myActivity.getFragmentManager(), "Alerta2");
-                   dialogo2.setMensaje("Ingrese un Mail correcto.");}
-            } else{
-               dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
-               dialogo1.setMensaje("Complete los campos.");}
+                    } else {
+                        dialogo3.show(myActivity.getFragmentManager(), "Alerta3");
+                        dialogo3.setMensaje("El usuario no existe.");
+                    }
+                } else {
+                    dialogo2.show(myActivity.getFragmentManager(), "Alerta2");
+                    dialogo2.setMensaje("Ingrese un Mail correcto.");
+                }
+            } else {
+                dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
+                dialogo1.setMensaje("Complete los campos.");
+            }
 
             vistaLog_in.limpiar();
 
@@ -114,10 +140,10 @@ public class ControladorLog_in implements View.OnClickListener {
             Intent intent2 = new Intent(myActivity, Registro.class);
             myActivity.startActivity(intent2);
         }
+
     }
-
-
 }
+
 
 
 
