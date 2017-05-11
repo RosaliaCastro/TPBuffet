@@ -21,6 +21,7 @@ public class ControladorRegistro implements View.OnClickListener {
     ModeloRegistro modeloRegistro;
     Activity myActivity;
     VistaRegistro vistaRegistro;
+    List <ModeloRegistro>Lista;
 
     public ControladorRegistro (ModeloRegistro modeloRegistro, Activity myActivity){
         this.modeloRegistro=modeloRegistro;
@@ -30,6 +31,7 @@ public class ControladorRegistro implements View.OnClickListener {
     public void setControladorVista(VistaRegistro vistaRegistro){
         this.vistaRegistro=vistaRegistro;
     }
+
     public Boolean validarMail(String mail)
     {
         Boolean res=false;
@@ -60,6 +62,16 @@ public class ControladorRegistro implements View.OnClickListener {
         return res;
 
     }
+    public boolean validarUsuario(String mail, String dni){
+        boolean res = false;
+        Lista=modeloRegistro.getLista();
+        for (int i=0; i < Lista.size(); i++){
+            if(mail.equals(Lista.get(i).getMail()) || dni.equals(Lista.get(i).getDni())){
+                res=true;
+            }
+        }
+        return res;
+    }
 
     @Override
     public void onClick(View view) {
@@ -68,6 +80,7 @@ public class ControladorRegistro implements View.OnClickListener {
             MiDialogo dialogo = new MiDialogo();
             MiDialogo dialogo1 = new MiDialogo();
             MiDialogo dialogo2 = new MiDialogo();
+            MiDialogo dialogo3 = new MiDialogo();
 
             String nombre = vistaRegistro.nombre.getText().toString();
             String apellido = vistaRegistro.apellido.getText().toString();
@@ -79,12 +92,16 @@ public class ControladorRegistro implements View.OnClickListener {
             if (validarCampo(nombre,apellido,dni,mail, clave, reingrese)){
                 if (validarMail(mail)){
                     if (validarClave(clave,reingrese)){
-                        ModeloRegistro nuevo = new ModeloRegistro(nombre,apellido,dni,mail,clave,reingrese);
-                        Intent logearse = new Intent(myActivity, Log_in.class);
-                        logearse.putExtra("mail",mail);
-                        logearse.putExtra("clave",clave);
-                        myActivity.startActivity(logearse);
-
+                        if (validarUsuario(mail, dni)){
+                            dialogo3.show(myActivity.getFragmentManager(),"alerta4");
+                            dialogo3.setMensaje("El usuario ya existe.");
+                        }else{
+                            ModeloRegistro nuevo = new ModeloRegistro(nombre,apellido,dni,mail,clave,reingrese);
+                            Intent logearse = new Intent(myActivity, Log_in.class);
+                            logearse.putExtra("Mail",mail);
+                            logearse.putExtra("Clave",clave);
+                            myActivity.startActivity(logearse);
+                        }
                     }else{
                         dialogo2.show(myActivity.getFragmentManager(),"alertaTres");
                         dialogo2.setMensaje("Ambas claves deben ser iguales");

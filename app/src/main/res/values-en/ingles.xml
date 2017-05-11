@@ -40,4 +40,7 @@
     <string name="Pedido">My Order</string>
     <string name="menuEnviar">Send current order</string>
     <string name="menuLimpiar">Delete Order</string>
+    <string name="Mensaje1">Complete Fields.</string>
+    <string name="Mensaje2">Enter a correct email.</string>
+    <string name="Mensaje3">Username does not exist.</string>
 </resources>

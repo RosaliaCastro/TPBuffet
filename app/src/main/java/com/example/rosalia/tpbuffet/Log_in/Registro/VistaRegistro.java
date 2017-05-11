@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.rosalia.tpbuffet.Log_in.Log_in.ModeloLog_in;
 import com.example.rosalia.tpbuffet.R;
 
 /**

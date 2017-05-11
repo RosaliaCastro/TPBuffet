@@ -39,5 +39,10 @@
     <string name="Pedido">Mi Pedido</string>
     <string name="menuEnviar">Enviar Pedido Actual</string>
     <string name="menuLimpiar">Limpiar Pedido</string>
+    <string name="Mensaje1">Complete los campos.</string>
+    <string name="Mensaje2">Ingrese un Mail correcto.</string>
+    <string name="Mensaje3">El usuario no existe.</string>
+    <string name="Mensaje4">Las claves deben ser iguales.</string>
+    <string name="Mensaje5">El usuario ya existe.</string>
 
 </resources>

@@ -1,7 +1,9 @@
 package com.example.rosalia.tpbuffet.Log_in.Registro;
 
+import java.util.List;
+
 /**
- * Created by Jona on 30/04/2017.
+ * Created by Jona on 11/05/2017.
  */
 public class ModeloRegistro {
     private String nombre;
@@ -10,15 +12,24 @@ public class ModeloRegistro {
     private String mail;
     private String clave;
     private String reingrese;
+    List<ModeloRegistro>ListaRegistrados;
 
     public ModeloRegistro(){}
 
-    public ModeloRegistro(String nombre, String apellido, String dni, String mail,String clave,String reingrese){
+
+    public List<ModeloRegistro> getLista() {
+        return ListaRegistrados;
+    }
+    public void setListaRegistrados(List<ModeloRegistro>ListaRegistrados){
+        this.ListaRegistrados=ListaRegistrados;
+    }
+
+    public ModeloRegistro(String nombre, String apellido,String dni, String mail, String clave, String reingrese){
         this.nombre=nombre;
         this.apellido=apellido;
         this.dni=dni;
         this.mail=mail;
-        this.clave=clave;
+        this.clave= clave;
         this.reingrese=reingrese;
     }
 

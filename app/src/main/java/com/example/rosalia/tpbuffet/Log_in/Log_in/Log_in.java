@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.util.ListUpdateCallback;
 
 import com.example.rosalia.tpbuffet.Log_in.Menu.VistaMenu;
+import com.example.rosalia.tpbuffet.Log_in.Registro.ControladorRegistro;
 import com.example.rosalia.tpbuffet.R;
 
 import java.util.ArrayList;
@@ -31,9 +32,11 @@ public class Log_in extends AppCompatActivity {
 
 
         ModeloLog_in modeloLog_in = new ModeloLog_in();
+        modeloLog_in.setListaUsuarios(ListaUsuarios);
         ControladorLog_in controladorLog_in = new ControladorLog_in(modeloLog_in,this,ListaUsuarios);
         VistaLog_in vistaLog_in = new VistaLog_in(modeloLog_in, controladorLog_in,this);
         controladorLog_in.setControladorVista(vistaLog_in);
+
 
         SharedPreferences miPerferencia = getSharedPreferences("miConfig", Context.MODE_PRIVATE);
         String Mail = miPerferencia.getString("Mail","");

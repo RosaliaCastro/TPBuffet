@@ -8,33 +8,38 @@ import java.util.List;
 public class ModeloLog_in {
     private String mail;
     private String clave;
-    //private List<ModeloLog_in>ListaUsuarios;
+    List<ModeloLog_in>ListaUsuarios;
+
     public ModeloLog_in(){}
 
-  // public ModeloLog_in(List<ModeloLog_in> ListaUsuarios){
-    //   this.ListaUsuarios=ListaUsuarios;
-   // }
+    public ModeloLog_in(List<ModeloLog_in>ListaUsuarios){
+        this.ListaUsuarios=ListaUsuarios;
+    }
+
+    public List<ModeloLog_in> getLista() {
+        return ListaUsuarios;
+    }
+    public void setListaUsuarios(List<ModeloLog_in>ListaUsuarios){
+        this.ListaUsuarios=ListaUsuarios;
+    }
+
     public ModeloLog_in(String mail, String clave){
         this.mail=mail;
         this.clave=clave;
-        //ListaUsuarios.add(new ModeloLog_in(mail,clave));
     }
 
-
-
-    public void setClave(String clave) {
-        this.clave = clave;
+    public String getMail() {
+        return mail;
+    }
+    public String getClave() {
+        return clave;
     }
 
     public void setMail(String mail) {
         this.mail = mail;
     }
 
-    public String getClave() {
-        return clave;
-    }
-
-    public String getMail() {
-        return mail;
+    public void setClave(String clave) {
+        this.clave = clave;
     }
 }
