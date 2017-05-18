@@ -16,7 +16,7 @@
         android:padding="5dp"
         android:textColor="@color/colorLetra"
         android:background="@color/colorPrimary"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textStyle="bold"
 
         />
@@ -28,15 +28,16 @@
         android:textColor="@color/colorLetra"
         android:gravity="center"
         />
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/txtImporte"
+        android:id="@+id/txtValor"
+        android:text="@string/Valor1"
         android:textColor="@color/colorLetra"
         android:gravity="right"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="15dp"
         />
 </LinearLayout>
     <LinearLayout
@@ -60,14 +61,16 @@
             android:textColor="@color/colorLetra"
             android:gravity="center"
             />
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtElemt"
-            android:gravity="right"
-            android:layout_gravity="right"
+            android:text="@string/Elementos1"
+            android:gravity="center"
+            android:textColor="@color/colorLetra"
+            android:layout_gravity="center"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="15dp"
             />
 
     </LinearLayout>

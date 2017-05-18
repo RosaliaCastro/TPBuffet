@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -108,8 +109,6 @@ public class ControladorLog_in implements View.OnClickListener {
 
         if (view.getId() == R.id.btnIngresar) {
             MiDialogo dialogo1 = new MiDialogo();
-            MiDialogo dialogo2 = new MiDialogo();
-            MiDialogo dialogo3 = new MiDialogo();
 
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
@@ -122,16 +121,16 @@ public class ControladorLog_in implements View.OnClickListener {
                         Intent intentMenu = new Intent(myActivity, Menu.class);
                         myActivity.startActivity(intentMenu);
                     } else {
-                        dialogo3.show(myActivity.getFragmentManager(), "Alerta3");
-                        dialogo3.setMensaje("El usuario no existe.");
+                        dialogo1.show(myActivity.getFragmentManager(), "Alerta3");
+                        dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
                     }
                 } else {
-                    dialogo2.show(myActivity.getFragmentManager(), "Alerta2");
-                    dialogo2.setMensaje("Ingrese un Mail correcto.");
+                    dialogo1.show(myActivity.getFragmentManager(), "Alerta2");
+                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje2));
                 }
             } else {
                 dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
-                dialogo1.setMensaje("Complete los campos.");
+                dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
             }
 
             vistaLog_in.limpiar();

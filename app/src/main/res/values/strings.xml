@@ -27,7 +27,9 @@
     <string name="Reingreses">reingrese clave</string>
     <string name="Pidiendo">Pidiendo...</string>
     <string name="Importe">Importe estimado:</string>
-    <string name="Elementos">Elementos seleccionados: </string>
+    <string name="Valor1">0,00</string>
+    <string name="Elementos">Elementos \n seleccionados: </string>
+    <string name="Elementos1">0</string>
     <string name="Enviar">Enviar pedido</string>
     <string name="Cafe">Cafè / Bebidas</string>
     <string name="Menu">Menu`s</string>
@@ -44,5 +46,6 @@
     <string name="Mensaje3">El usuario no existe.</string>
     <string name="Mensaje4">Las claves deben ser iguales.</string>
     <string name="Mensaje5">El usuario ya existe.</string>
+    <string name="Mensaje6">Realice un pedido</string>
 
 </resources>

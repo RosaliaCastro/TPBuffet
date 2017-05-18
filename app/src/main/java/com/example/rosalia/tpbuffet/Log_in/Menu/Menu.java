@@ -2,6 +2,7 @@ package com.example.rosalia.tpbuffet.Log_in.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Jona on 01/05/2017.
  */
-public class Menu extends AppCompatActivity implements MyOnItemClick {
+public class Menu extends AppCompatActivity {
 
 
     @Override
@@ -58,27 +59,21 @@ public class Menu extends AppCompatActivity implements MyOnItemClick {
 
         List<ModeloMenu> lista = new ArrayList<ModeloMenu>();
         lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
+        lista.add(new ModeloMenu("porcion de tarta", 15.50));
+        lista.add(new ModeloMenu("Sandwith de miga", 15.50));
+        lista.add(new ModeloMenu("Porcion de tortilla", 15.50));
+        lista.add(new ModeloMenu("porcion de torta", 15.50));
+        lista.add(new ModeloMenu("Sandwith de milanesa", 15.50));
+        lista.add(new ModeloMenu("Tostado", 15.50));
+        lista.add(new ModeloMenu("Medialuna", 15.50));
+        modeloMenu1.setListaMenu(lista);
 
         RecyclerView list = (RecyclerView) findViewById(R.id.list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         list.setLayoutManager(linearLayoutManager);
-        MyAdapter myAdapter = new MyAdapter(lista, this);
+        MyAdapter myAdapter = new MyAdapter(lista,controladorMenu);
         list.setAdapter(myAdapter);
         myAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onItemClick(int position) {
-
     }
 
 }

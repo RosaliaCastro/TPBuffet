@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.rosalia.tpbuffet.Log_in.Menu.ControladorMenu;
 import com.example.rosalia.tpbuffet.R;
 import com.example.rosalia.tpbuffet.Log_in.Menu.MyOnItemClick;
 
@@ -54,23 +56,14 @@ public class Pedido extends AppCompatActivity implements MyOnItemClick {
             ControladorPedido controladorPedido = new ControladorPedido(modeloPedido, this);
             VistaPedido vistaPedido= new VistaPedido(modeloPedido, controladorPedido,this);
             controladorPedido.setVistaPedido(vistaPedido);
+            ControladorMenu controladorMenu= new ControladorMenu();
 
-            List<ModeloPedido> listaPedido = new ArrayList<ModeloPedido>();
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-            listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
+
 
             RecyclerView list2 = (RecyclerView) findViewById(R.id.list2);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             list2.setLayoutManager(linearLayoutManager);
-            MyAdapterPedido myAdapter = new MyAdapterPedido(listaPedido, this);
+            MyAdapterPedido myAdapter = new MyAdapterPedido(controladorMenu.getLista(), this);
             list2.setAdapter(myAdapter);
             myAdapter.notifyDataSetChanged();
 

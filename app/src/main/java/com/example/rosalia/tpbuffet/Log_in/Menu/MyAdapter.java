@@ -19,7 +19,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     public MyAdapter (List<ModeloMenu> lista, MyOnItemClick listener){
             this.lista=lista;
-        this.listener=listener;
+            this.listener=listener;
     }
 
     @Override
@@ -40,5 +40,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     @Override
     public int getItemCount() {
         return lista.size();
+    }
+    public void agregarPedido(int posision){
+        for (int i = 0; i<lista.size(); i++){
+
+        }
     }
 }

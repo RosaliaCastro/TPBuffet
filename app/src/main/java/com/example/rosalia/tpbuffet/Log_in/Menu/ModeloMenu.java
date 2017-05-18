@@ -1,5 +1,7 @@
 package com.example.rosalia.tpbuffet.Log_in.Menu;
 
+import java.util.List;
+
 /**
  * Created by Jona on 01/05/2017.
  */
@@ -7,7 +9,19 @@ public class ModeloMenu {
     private String descripcion;
     private Double precio;
     private Double importe;
-    private Integer elementos;
+    private int elementos;
+    List<ModeloMenu>Lista;
+
+    public List<ModeloMenu> getListaMenu(){
+        return Lista;
+    }
+    public void setListaMenu(List<ModeloMenu> Lista){
+        this.Lista=Lista;
+    }
+    public ModeloMenu (Double importe, int elementos){
+        this.importe=importe;
+        this.elementos=elementos;
+    }
 
     public ModeloMenu(String descripcion, Double precio){
         this.descripcion= descripcion;
@@ -39,7 +53,7 @@ public class ModeloMenu {
         return elementos;
     }
 
-    public void setElementos(Integer elementos) {
+    public void setElementos(int elementos) {
         this.elementos = elementos;
     }
 

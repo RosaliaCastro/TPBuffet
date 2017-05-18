@@ -1,9 +1,13 @@
 package com.example.rosalia.tpbuffet.Log_in.Menu;
 
+import android.app.Dialog;
+import android.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.rosalia.tpbuffet.Log_in.Log_in.ControladorLog_in;
+import com.example.rosalia.tpbuffet.Log_in.Log_in.MiDialogo;
 import com.example.rosalia.tpbuffet.R;
 
 /**

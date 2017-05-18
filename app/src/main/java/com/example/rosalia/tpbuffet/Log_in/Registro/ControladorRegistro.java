@@ -76,11 +76,7 @@ public class ControladorRegistro implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId()== R.id.btnRegistrarme2){
-
-            MiDialogo dialogo = new MiDialogo();
             MiDialogo dialogo1 = new MiDialogo();
-            MiDialogo dialogo2 = new MiDialogo();
-            MiDialogo dialogo3 = new MiDialogo();
 
             String nombre = vistaRegistro.nombre.getText().toString();
             String apellido = vistaRegistro.apellido.getText().toString();
@@ -93,8 +89,8 @@ public class ControladorRegistro implements View.OnClickListener {
                 if (validarMail(mail)){
                     if (validarClave(clave,reingrese)){
                         if (validarUsuario(mail, dni)){
-                            dialogo3.show(myActivity.getFragmentManager(),"alerta4");
-                            dialogo3.setMensaje("El usuario ya existe.");
+                            dialogo1.show(myActivity.getFragmentManager(),"alerta3");
+                            dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
                         }else{
                             ModeloRegistro nuevo = new ModeloRegistro(nombre,apellido,dni,mail,clave,reingrese);
                             Intent logearse = new Intent(myActivity, Log_in.class);
@@ -103,22 +99,19 @@ public class ControladorRegistro implements View.OnClickListener {
                             myActivity.startActivity(logearse);
                         }
                     }else{
-                        dialogo2.show(myActivity.getFragmentManager(),"alertaTres");
-                        dialogo2.setMensaje("Ambas claves deben ser iguales");
+                        dialogo1.show(myActivity.getFragmentManager(),"alerta4");
+                        dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje4));
                     }
                 }else{
-                    dialogo1.show(myActivity.getFragmentManager(),"alertaDos");
-                    dialogo1.setMensaje("Ingrese un Mail correcto.");
+                    dialogo1.show(myActivity.getFragmentManager(),"alerta2");
+                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje2));
                 }
             }else{
-                dialogo.show(myActivity.getFragmentManager(),"alertaUno");
-                dialogo.setMensaje("Completar todos los campos.");
-
+                dialogo1.show(myActivity.getFragmentManager(),"alerta1");
+                dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
             }
 
             vistaRegistro.limpiar();
-            vistaRegistro.nombre.findViewById(R.id.txtNombre).setFocusable(false);
-
         }
     }
 

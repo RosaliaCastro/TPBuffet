@@ -28,7 +28,9 @@
     <string name="Reingreses">reenter key</string>
     <string name="Pidiendo">Asking...</string>
     <string name="Importe">Estimated amount</string>
+    <string name="Valor1">0,00</string>
     <string name="Elementos">Selected items: </string>
+    <string name="Elementos1">0</string>
     <string name="Enviar">Send the order</string>
     <string name="Cafe">Cofee / Drinks</string>
     <string name="Menu">Menu`s</string>
