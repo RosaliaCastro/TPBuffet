@@ -18,6 +18,7 @@ public class ModeloMenu {
     public void setListaMenu(List<ModeloMenu> Lista){
         this.Lista=Lista;
     }
+
     public ModeloMenu (Double importe, int elementos){
         this.importe=importe;
         this.elementos=elementos;

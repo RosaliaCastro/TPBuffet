@@ -28,7 +28,7 @@
             android:textColor="@color/colorLetra"
             android:gravity="center"
             />
-        <EditText
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtImportePedido"
@@ -36,18 +36,41 @@
             android:gravity="right"
             android:layout_gravity="right"
             android:textStyle="bold"
-            android:textSize="30dp"
+            android:textSize="15dp"
             />
     </LinearLayout>
-    <Button
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Enviar"
-        android:padding="5dp"
-        android:layout_gravity="right"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/colorLetra"
-        android:id="@+id/btnEnviarPedido"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Elementos"
+            android:padding="5dp"
+            android:textColor="@color/colorLetra"
+            android:gravity="center"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtElementoPedido"
+            android:gravity="center"
+            android:textColor="@color/colorLetra"
+            android:layout_gravity="center"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Enviar"
+            android:padding="15dp"
+            android:layout_gravity="right"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/colorLetra"
+            android:id="@+id/btnEnviarPedido"/>
+    </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list2"

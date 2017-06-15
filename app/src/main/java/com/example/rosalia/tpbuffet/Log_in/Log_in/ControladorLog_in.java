@@ -27,18 +27,33 @@ public class ControladorLog_in implements View.OnClickListener {
     private Activity myActivity;
     private VistaLog_in vistaLog_in;
     List<ModeloLog_in> ListaUsuarios;
+    SharedPreferences myPreferencia;
 
     public ControladorLog_in() {
     }
 
-    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, List<ModeloLog_in> listaUsuarios) {
+    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, List<ModeloLog_in> listaUsuarios, SharedPreferences myPreferencia) {
         this.modeloLog_in = modeloLog_in;
         this.myActivity = myActivity;
         this.ListaUsuarios = listaUsuarios;
+        this.myPreferencia=myPreferencia;
     }
 
     public void setControladorVista(VistaLog_in vistaLog_in) {
         this.vistaLog_in = vistaLog_in;
+    }
+
+    public void chequearRecordarme(SharedPreferences myPreferencia){
+    String Mail = myPreferencia.getString("Mail","");
+    String Clave = myPreferencia.getString("Clave","");
+    vistaLog_in.mail.setText(Mail);
+    vistaLog_in.clave.setText(Clave);
+    if (Mail != "" && Clave != ""){
+        Intent myIntent = new Intent(myActivity, Menu.class);
+        myActivity.startActivity(myIntent);
+
+    }
+
     }
 
     public boolean validarMail(String mail) {
@@ -76,14 +91,14 @@ public class ControladorLog_in implements View.OnClickListener {
         return res;
     }
     public void recordarme(){
-        SharedPreferences miPreferencia = myActivity.getSharedPreferences("miConfig", Context.MODE_PRIVATE);
+
         CheckBox check = vistaLog_in.recordarme;
 
         if (check.isChecked()){
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
 
-            SharedPreferences.Editor editor =miPreferencia.edit();
+            SharedPreferences.Editor editor =myPreferencia.edit();
             editor.putString("Mail",mail);
             editor.putString("Clave",clave);
             editor.commit();
@@ -107,6 +122,7 @@ public class ControladorLog_in implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
+
         if (view.getId() == R.id.btnIngresar) {
             MiDialogo dialogo1 = new MiDialogo();
 
@@ -122,6 +138,7 @@ public class ControladorLog_in implements View.OnClickListener {
                         myActivity.startActivity(intentMenu);
                     } else {
                         dialogo1.show(myActivity.getFragmentManager(), "Alerta3");
+
                         dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
                     }
                 } else {

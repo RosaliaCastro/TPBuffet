@@ -2,6 +2,7 @@ package com.example.rosalia.tpbuffet.Log_in.Menu;
 
 import android.app.Dialog;
 import android.app.FragmentManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -29,7 +30,12 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     @Override
     public void onClick(View view) {
+
+        if(view.getId()!= R.id.fbAgregar){
+
+    }
         listener.onItemClick(position);
+
     }
     public void setPosition(int position){
         this.position=position;

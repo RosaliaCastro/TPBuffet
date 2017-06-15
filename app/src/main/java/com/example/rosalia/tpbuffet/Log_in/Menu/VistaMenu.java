@@ -17,10 +17,12 @@ public class VistaMenu {
     Button btnEnviar;
     TextView txtImporte;
     TextView txtElementos;
+    ControladorMenu controladorMenu;
     //FloatingActionButton fbAgregar;
 
     public VistaMenu(ModeloMenu modeloMenu, ControladorMenu controladorMenu, Activity myActivuty){
         this.modeloMenu=modeloMenu;
+        this.controladorMenu=controladorMenu;
         txtElementos=(TextView) myActivuty.findViewById(R.id.txtElemt);
         txtImporte=(TextView)myActivuty.findViewById(R.id.txtValor);
         btnEnviar=(Button)myActivuty.findViewById(R.id.btnEnviarP);

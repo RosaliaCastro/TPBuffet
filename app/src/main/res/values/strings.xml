@@ -47,5 +47,9 @@
     <string name="Mensaje4">Las claves deben ser iguales.</string>
     <string name="Mensaje5">El usuario ya existe.</string>
     <string name="Mensaje6">Realice un pedido</string>
+    <string name="MensajeFinal">El pedido fue enviado</string>
+    <string name="MensajeTitulo1">Alerta!!</string>
+    <string name="MensajeImporte">Importe Total: </string>
+    <string name="MensajeCantidad">Cantidad de Elementos: </string>
 
 </resources>

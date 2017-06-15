@@ -31,13 +31,15 @@
         android:layout_height="wrap_content"
         android:text="@string/Bienvenido"
         android:gravity="center"
-        android:textColor="@color/colorLetra"/>
+        android:textColor="@color/colorLetra"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/BuffetUTN"
         android:gravity="center"
-        android:textColor="@color/colorLetra"/>
+        android:textColor="@color/colorLetra"
+        />
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"

@@ -41,9 +41,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
     public int getItemCount() {
         return lista.size();
     }
-    public void agregarPedido(int posision){
-        for (int i = 0; i<lista.size(); i++){
 
-        }
-    }
 }

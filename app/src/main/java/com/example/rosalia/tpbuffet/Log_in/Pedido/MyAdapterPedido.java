@@ -17,7 +17,7 @@ public class MyAdapterPedido extends RecyclerView.Adapter<MyViewHolderPedido> {
     private List<ModeloPedido> listaPedido;
     private MyOnItemClick listener;
 
-    public MyAdapterPedido(List<ModeloPedido>listaPedido,MyOnItemClick listener){
+    public MyAdapterPedido(List<ModeloPedido> listaPedido,MyOnItemClick listener){
         this.listaPedido =listaPedido;
         this.listener=listener;
     }

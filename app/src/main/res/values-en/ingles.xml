@@ -45,4 +45,7 @@
     <string name="Mensaje1">Complete Fields.</string>
     <string name="Mensaje2">Enter a correct email.</string>
     <string name="Mensaje3">Username does not exist.</string>
+    <string name="MensajeFinal">The order was sent</string>
+    <string name="MensajeImporte">Total: </string>
+    <string name="MensajeCantidad">Number de elements: </string>
 </resources>

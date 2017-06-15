@@ -2,13 +2,14 @@ package com.example.rosalia.tpbuffet.Log_in.Menu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.rosalia.tpbuffet.Log_in.Log_in.ControladorLog_in;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.MiDialogo;
 import com.example.rosalia.tpbuffet.Log_in.Pedido.ModeloPedido;
-import com.example.rosalia.tpbuffet.Log_in.Pedido.MyAdapterPedido;
 import com.example.rosalia.tpbuffet.Log_in.Pedido.Pedido;
+
 import com.example.rosalia.tpbuffet.R;
 
 import java.util.ArrayList;
@@ -25,14 +26,27 @@ public class ControladorMenu implements View.OnClickListener, MyOnItemClick {
     List<ModeloPedido>ListaPedido = new ArrayList<>();
     Double importe=0.00;
     int contador=0;
+    RecyclerView list;
+
     public ControladorMenu(){}
 
     public ControladorMenu(ModeloMenu modeloMenu, Activity myActivity){
         this.modeloMenu= modeloMenu;
         this.myActivity= myActivity;
+
     }
     public void setVistaMenu(VistaMenu vistaMenu){
         this.vistaMenu=vistaMenu;
+    }
+
+    public void cargarRecycler(RecyclerView list, List<ModeloMenu> miLista){
+        this.list=list;
+        this.ListaMenu=miLista;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(myActivity);
+        list.setLayoutManager(linearLayoutManager);
+        MyAdapter myAdapter = new MyAdapter(ListaMenu,vistaMenu.controladorMenu);
+        list.setAdapter(myAdapter);
+        myAdapter.notifyDataSetChanged();
     }
 
     @Override

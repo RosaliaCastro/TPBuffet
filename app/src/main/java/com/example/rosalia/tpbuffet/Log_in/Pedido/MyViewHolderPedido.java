@@ -27,6 +27,9 @@ public class MyViewHolderPedido extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View view) {
+        if (view.getId()!= R.id.fbEliminar){
+
+        }
         listener.onItemClick(position);
     }
     public void setPosition(int position){

@@ -19,9 +19,11 @@
             android:label="@string/nameLayaout2">
         </activity>
         <activity android:name=".Log_in.Menu.Menu"
-            android:label="@string/nameLayaout3"></activity>
+            android:label="@string/nameLayaout3">
+        </activity>
         <activity android:name=".Log_in.Pedido.Pedido"
-            android:label="@string/nameLayaout4"></activity>
+        android:label="@string/nameLayaout4">
+        </activity>
     </application>
 
 </manifest>

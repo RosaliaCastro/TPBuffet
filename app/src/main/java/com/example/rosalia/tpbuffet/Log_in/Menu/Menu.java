@@ -2,10 +2,7 @@ package com.example.rosalia.tpbuffet.Log_in.Menu;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -22,25 +19,23 @@ import java.util.List;
  */
 public class Menu extends AppCompatActivity {
 
-
     @Override
     public boolean onCreateOptionsMenu(android.view.Menu menu_layout){
         getMenuInflater().inflate(R.menu.menu_layout,menu_layout);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menuPedido) {
             Log.d("Menu", "menuPedido");
-            Intent miPedido = new Intent(this, Pedido.class);
+            Intent miPedido = new Intent(this,Pedido.class);
             this.startActivity(miPedido);
             //me envia a la layaout pedido
             return true;
         } else if (id == R.id.menuSalir) {
             Log.d("Menu", "menuSalir");
-            finish();
+            finishAffinity();
             //cierra la sesion
             return true;
         }
@@ -68,12 +63,9 @@ public class Menu extends AppCompatActivity {
         lista.add(new ModeloMenu("Medialuna", 15.50));
         modeloMenu1.setListaMenu(lista);
 
-        RecyclerView list = (RecyclerView) findViewById(R.id.list);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        list.setLayoutManager(linearLayoutManager);
-        MyAdapter myAdapter = new MyAdapter(lista,controladorMenu);
-        list.setAdapter(myAdapter);
-        myAdapter.notifyDataSetChanged();
+        RecyclerView list = (RecyclerView)findViewById(R.id.list);
+        controladorMenu.cargarRecycler(list, lista);
+
     }
 
 }
