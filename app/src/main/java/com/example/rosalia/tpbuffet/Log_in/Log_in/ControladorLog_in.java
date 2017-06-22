@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -26,17 +27,19 @@ public class ControladorLog_in implements View.OnClickListener {
     private ModeloLog_in modeloLog_in;
     private Activity myActivity;
     private VistaLog_in vistaLog_in;
-    List<ModeloLog_in> ListaUsuarios;
+    private Integer codigo;
+
     SharedPreferences myPreferencia;
+    MyHiloLo_gin myHiloLo_gin;
 
     public ControladorLog_in() {
     }
 
-    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, List<ModeloLog_in> listaUsuarios, SharedPreferences myPreferencia) {
+    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, SharedPreferences myPreferencia,MyHiloLo_gin hilo) {
         this.modeloLog_in = modeloLog_in;
         this.myActivity = myActivity;
-        this.ListaUsuarios = listaUsuarios;
         this.myPreferencia=myPreferencia;
+        this.myHiloLo_gin=hilo;
     }
 
     public void setControladorVista(VistaLog_in vistaLog_in) {
@@ -53,67 +56,19 @@ public class ControladorLog_in implements View.OnClickListener {
         myActivity.startActivity(myIntent);
 
     }
-
     }
 
-    public boolean validarMail(String mail) {
-        boolean res = false;
-        int cant = mail.length();
-        for (int i = 0; i < cant; i++) {
-            Character letra = mail.charAt(i);
-            if (letra == '@') {
-                res = true;
-            }
-        }
-        return res;
-    }
-
-    public boolean validarCampo(String mail, String clave) {
-        boolean res = true;
-        int cant1 = mail.length();
-        int cant2 = clave.length();
-
-        if (cant1 == 0 && cant2 == 0 || cant1 == 0 || cant2 == 0) {
-            res = false;
-        }
-
-        return res;
-    }
-
-    public boolean validarUsuario(ModeloLog_in usuario) {
-        boolean res = false;
-
-        for (int i = 0; i < ListaUsuarios.size(); i++) {
-            if ((usuario.getMail().equals(ListaUsuarios.get(i).getMail())) && (usuario.getClave().equals(ListaUsuarios.get(i).getClave()))) {
-                res = true;
-            }
-        }
-        return res;
-    }
     public void recordarme(){
-
         CheckBox check = vistaLog_in.recordarme;
-
         if (check.isChecked()){
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
-
             SharedPreferences.Editor editor =myPreferencia.edit();
             editor.putString("Mail",mail);
             editor.putString("Clave",clave);
             editor.commit();
-
         }
-
     }
-
-    public void agregarNuevo() {
-        String dato1 = myActivity.getIntent().getExtras().getString("mail");
-        String dato2 = myActivity.getIntent().getExtras().getString("clave");
-        ModeloLog_in nuevo = new ModeloLog_in(dato1, dato2);
-        ListaUsuarios.add(nuevo);
-    }
-
 
     private void startActivity(Intent intent) {
         myActivity.startActivity(intent);
@@ -121,25 +76,23 @@ public class ControladorLog_in implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
-
         if (view.getId() == R.id.btnIngresar) {
-            MiDialogo dialogo1 = new MiDialogo();
 
+            MiDialogo dialogo1 = new MiDialogo();
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
 
-            if (validarCampo(mail, clave)) {
+            if (validarCampo(mail, clave)) { //valida que no esten vacios
                 if (validarMail(mail)) {
-                    ModeloLog_in usuario = new ModeloLog_in(mail, clave);
-                    if (validarUsuario(usuario)) {
+                    validarUsuario(mail, clave);
+                    if (modeloLog_in.getCodigo() == 200) {
                         recordarme();
                         Intent intentMenu = new Intent(myActivity, Menu.class);
                         myActivity.startActivity(intentMenu);
-                    } else {
+                    } else { if(modeloLog_in.getCodigo() == 400 || modeloLog_in.getCodigo() ==500){
                         dialogo1.show(myActivity.getFragmentManager(), "Alerta3");
-
                         dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
+                    }
                     }
                 } else {
                     dialogo1.show(myActivity.getFragmentManager(), "Alerta2");
@@ -149,14 +102,39 @@ public class ControladorLog_in implements View.OnClickListener {
                 dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
                 dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
             }
-
             vistaLog_in.limpiar();
-
         } else if (view.getId() == R.id.btnRegistrarme) {
             Intent intent2 = new Intent(myActivity, Registro.class);
             myActivity.startActivity(intent2);
         }
 
+    }
+
+    public boolean validarMail(String mail) {
+        boolean res = false;
+        myHiloLo_gin.opcion=1;
+        Thread hiloUno = new Thread(myHiloLo_gin);
+        hiloUno.start();
+        hiloUno.run();
+
+
+        return res;
+    }
+
+    public boolean validarCampo(String mail, String clave) {
+        boolean res = true;
+        int cant1 = mail.length();
+        int cant2 = clave.length();
+        if (cant1 == 0 && cant2 == 0 || cant1 == 0 || cant2 == 0) {
+            res = false;
+        }
+        return res;
+    }
+
+    public void validarUsuario(String mail, String clave) {
+        myHiloLo_gin.opcion=2;
+        Thread hiloDos = new Thread(myHiloLo_gin);
+        hiloDos.start();
     }
 }
 
