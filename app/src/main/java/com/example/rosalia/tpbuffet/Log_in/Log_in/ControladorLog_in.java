@@ -1,41 +1,37 @@
 package com.example.rosalia.tpbuffet.Log_in.Log_in;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 
-import com.example.rosalia.tpbuffet.*;
 import com.example.rosalia.tpbuffet.Log_in.Menu.Menu;
+import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
 import com.example.rosalia.tpbuffet.Log_in.Registro.Registro;
 import com.example.rosalia.tpbuffet.R;
-import com.example.rosalia.tpbuffet.Log_in.Log_in.MiDialogo;
 
-import java.util.List;
-
-import static android.support.v4.app.ActivityCompat.startActivity;
+import org.json.JSONObject;
 
 /**
  * Created by Jona on 30/04/2017.
  */
-public class ControladorLog_in implements View.OnClickListener {
+public class ControladorLog_in implements View.OnClickListener, Handler.Callback {
     private ModeloLog_in modeloLog_in;
     private Activity myActivity;
     private VistaLog_in vistaLog_in;
-    List<ModeloLog_in> ListaUsuarios;
     SharedPreferences myPreferencia;
+    Handler myHandler = new Handler(this);
+    MyHiloLo_gin myHiloLo_gin;
 
-    public ControladorLog_in() {
-    }
+    public ControladorLog_in() {}
 
-    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, List<ModeloLog_in> listaUsuarios, SharedPreferences myPreferencia) {
+    public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, SharedPreferences myPreferencia) {
         this.modeloLog_in = modeloLog_in;
         this.myActivity = myActivity;
-        this.ListaUsuarios = listaUsuarios;
         this.myPreferencia=myPreferencia;
     }
 
@@ -48,72 +44,23 @@ public class ControladorLog_in implements View.OnClickListener {
     String Clave = myPreferencia.getString("Clave","");
     vistaLog_in.mail.setText(Mail);
     vistaLog_in.clave.setText(Clave);
-    if (Mail != "" && Clave != ""){
+        if (Mail != "" && Clave != ""){
         Intent myIntent = new Intent(myActivity, Menu.class);
         myActivity.startActivity(myIntent);
-
-    }
-
-    }
-
-    public boolean validarMail(String mail) {
-        boolean res = false;
-        int cant = mail.length();
-        for (int i = 0; i < cant; i++) {
-            Character letra = mail.charAt(i);
-            if (letra == '@') {
-                res = true;
-            }
         }
-        return res;
     }
 
-    public boolean validarCampo(String mail, String clave) {
-        boolean res = true;
-        int cant1 = mail.length();
-        int cant2 = clave.length();
-
-        if (cant1 == 0 && cant2 == 0 || cant1 == 0 || cant2 == 0) {
-            res = false;
-        }
-
-        return res;
-    }
-
-    public boolean validarUsuario(ModeloLog_in usuario) {
-        boolean res = false;
-
-        for (int i = 0; i < ListaUsuarios.size(); i++) {
-            if ((usuario.getMail().equals(ListaUsuarios.get(i).getMail())) && (usuario.getClave().equals(ListaUsuarios.get(i).getClave()))) {
-                res = true;
-            }
-        }
-        return res;
-    }
     public void recordarme(){
-
         CheckBox check = vistaLog_in.recordarme;
-
         if (check.isChecked()){
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
-
             SharedPreferences.Editor editor =myPreferencia.edit();
             editor.putString("Mail",mail);
             editor.putString("Clave",clave);
             editor.commit();
-
         }
-
     }
-
-    public void agregarNuevo() {
-        String dato1 = myActivity.getIntent().getExtras().getString("mail");
-        String dato2 = myActivity.getIntent().getExtras().getString("clave");
-        ModeloLog_in nuevo = new ModeloLog_in(dato1, dato2);
-        ListaUsuarios.add(nuevo);
-    }
-
 
     private void startActivity(Intent intent) {
         myActivity.startActivity(intent);
@@ -121,43 +68,79 @@ public class ControladorLog_in implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-
-
+        MiDialogo dialogo1 = new MiDialogo();
         if (view.getId() == R.id.btnIngresar) {
-            MiDialogo dialogo1 = new MiDialogo();
-
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
 
-            if (validarCampo(mail, clave)) {
-                if (validarMail(mail)) {
-                    ModeloLog_in usuario = new ModeloLog_in(mail, clave);
-                    if (validarUsuario(usuario)) {
-                        recordarme();
-                        Intent intentMenu = new Intent(myActivity, Menu.class);
-                        myActivity.startActivity(intentMenu);
-                    } else {
-                        dialogo1.show(myActivity.getFragmentManager(), "Alerta3");
-
-                        dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
-                    }
+            if (validarCampo(mail, clave)) { //valida que no esten vacios
+                String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
+                String servicioValidarC="http://192.168.1.36:3000/usuarios/"+mail+"/"+clave;
+                myHiloLo_gin = new MyHiloLo_gin(servicioValidarC, myHandler);
+                Thread hiloDos = new Thread(myHiloLo_gin);
+                hiloDos.start();
                 } else {
-                    dialogo1.show(myActivity.getFragmentManager(), "Alerta2");
-                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje2));
-                }
-            } else {
                 dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
                 dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
+                vistaLog_in.limpiar();
             }
 
-            vistaLog_in.limpiar();
-
-        } else if (view.getId() == R.id.btnRegistrarme) {
+        }else if (view.getId() == R.id.btnRegistrarme) {
             Intent intent2 = new Intent(myActivity, Registro.class);
             myActivity.startActivity(intent2);
         }
-
     }
+
+    public boolean validarCampo(String mail, String clave) {
+        boolean res = true;
+        int cant1 = mail.length();
+        int cant2 = clave.length();
+        if (cant1 == 0 && cant2 == 0 || cant1 == 0 || cant2 == 0) {
+            res = false;
+        }
+        return res;
+    }
+
+    public void validarUsuario() {
+        MiDialogo dialogo1 = new MiDialogo();
+        if (modeloLog_in.getCodigo() == 200) {
+            recordarme();
+            dialogo1.show(myActivity.getFragmentManager(),"Alerta2");
+            dialogo1.setMensaje(modeloLog_in.getMensaje());
+            Intent intentMenu = new Intent(myActivity, Menu.class);
+            myActivity.startActivity(intentMenu);
+        } else { if(modeloLog_in.getCodigo() == 400 || modeloLog_in.getCodigo() ==500){
+            dialogo1.show(myActivity.getFragmentManager(), "Alerta3");
+            //dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
+            dialogo1.setMensaje(modeloLog_in.getMensaje());
+            }
+        }
+    }
+    public void parcear(String str){
+        try{
+            JSONObject jsonObject = new JSONObject(str);
+            String mensaje = jsonObject.getString("mensaje");
+            Integer cod = jsonObject.getInt("codigo");
+            modeloLog_in.setCodigo(cod);
+            modeloLog_in.setMensaje(mensaje);
+            Log.d("Mensaje","parceado");
+            validarUsuario();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        String resultado;
+        Log.d("Recibendo","Mensaje");
+        resultado= (String) message.obj;
+        parcear(resultado);
+        return false;
+    }
+
 }
 
 
