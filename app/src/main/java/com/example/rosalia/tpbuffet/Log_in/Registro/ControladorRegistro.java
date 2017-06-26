@@ -2,14 +2,20 @@ package com.example.rosalia.tpbuffet.Log_in.Registro;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 
 import com.example.rosalia.tpbuffet.Log_in.Log_in.ControladorLog_in;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.Log_in;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.MiDialogo;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.ModeloLog_in;
+import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
 import com.example.rosalia.tpbuffet.R;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +23,13 @@ import java.util.List;
 /**
  * Created by Jona on 30/04/2017.
  */
-public class ControladorRegistro implements View.OnClickListener {
+public class ControladorRegistro implements View.OnClickListener, Handler.Callback {
     ModeloRegistro modeloRegistro;
     Activity myActivity;
     VistaRegistro vistaRegistro;
-    List <ModeloRegistro>Lista;
+    MyHiloLo_gin miHilo;
+    Handler myHandler= new Handler(this);
+    MiDialogo dialogo1 = new MiDialogo();
 
     public ControladorRegistro (ModeloRegistro modeloRegistro, Activity myActivity){
         this.modeloRegistro=modeloRegistro;
@@ -32,18 +40,6 @@ public class ControladorRegistro implements View.OnClickListener {
         this.vistaRegistro=vistaRegistro;
     }
 
-    public Boolean validarMail(String mail)
-    {
-        Boolean res=false;
-        int cant = mail.length();
-        for (int i=0; i < cant; i++){
-            Character letra = mail.charAt(i);
-            if (letra == '@'){
-                res = true;
-            }
-        }
-        return  res;
-    }
     public Boolean validarClave(String clave, String reingrese){
         Boolean res=false;
         if (clave.equals(reingrese))
@@ -62,21 +58,11 @@ public class ControladorRegistro implements View.OnClickListener {
         return res;
 
     }
-    public boolean validarUsuario(String mail, String dni){
-        boolean res = false;
-        Lista=modeloRegistro.getLista();
-        for (int i=0; i < Lista.size(); i++){
-            if(mail.equals(Lista.get(i).getMail()) || dni.equals(Lista.get(i).getDni())){
-                res=true;
-            }
-        }
-        return res;
-    }
 
     @Override
     public void onClick(View view) {
         if (view.getId()== R.id.btnRegistrarme2){
-            MiDialogo dialogo1 = new MiDialogo();
+
 
             String nombre = vistaRegistro.nombre.getText().toString();
             String apellido = vistaRegistro.apellido.getText().toString();
@@ -85,27 +71,20 @@ public class ControladorRegistro implements View.OnClickListener {
             String clave= vistaRegistro.clave.getText().toString();
             String reingrese=vistaRegistro.reingrese.getText().toString();
 
-            if (validarCampo(nombre,apellido,dni,mail, clave, reingrese)){
-                if (validarMail(mail)){
-                    if (validarClave(clave,reingrese)){
-                        if (validarUsuario(mail, dni)){
-                            dialogo1.show(myActivity.getFragmentManager(),"alerta3");
-                            dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
-                        }else{
-                            ModeloRegistro nuevo = new ModeloRegistro(nombre,apellido,dni,mail,clave,reingrese);
-                            Intent logearse = new Intent(myActivity, Log_in.class);
-                            logearse.putExtra("Mail",mail);
-                            logearse.putExtra("Clave",clave);
-                            myActivity.startActivity(logearse);
-                        }
+            if (validarCampo(nombre,apellido,dni,mail, clave, reingrese))//valida campos vacios
+            {
+                if (validarClave(clave,reingrese)){ //valida que sean iguales
+                    String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
+                    String servicioValidarC="http://192.168.1.36:3000/usuarios/"+mail+"/"+clave;
+                    miHilo = new MyHiloLo_gin(servicioValidarC, myHandler);
+                    Thread hiloUnoR = new Thread(miHilo);
+                    hiloUnoR.start();
+                    dialogo1.show(myActivity.getFragmentManager(),"alerta3");
+                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
                     }else{
                         dialogo1.show(myActivity.getFragmentManager(),"alerta4");
                         dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje4));
                     }
-                }else{
-                    dialogo1.show(myActivity.getFragmentManager(),"alerta2");
-                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje2));
-                }
             }else{
                 dialogo1.show(myActivity.getFragmentManager(),"alerta1");
                 dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
@@ -114,6 +93,48 @@ public class ControladorRegistro implements View.OnClickListener {
             vistaRegistro.limpiar();
         }
     }
-
+    public void validarUsuario() {
+        if (modeloRegistro.getCodigo() == 200) {
+            dialogo1.show(myActivity.getFragmentManager(),"alerta2");
+            dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje5));
+            vistaRegistro.limpiar();
+        } else { if(modeloRegistro.getCodigo() == 400 || modeloRegistro.getCodigo() ==500){
+            String servicioNuevoF="http://192.168.2.95:3000/usuarios/nuevo";
+            String servicioNuevoC="http://192.168.1.36:3000/usuarios/nuevo";
+            miHilo = new MyHiloLo_gin(servicioNuevoC, myHandler);
+            Thread hiloDosR = new Thread(miHilo);
+            hiloDosR.start();
+            }
+        }
     }
+    public void nuevo(){
+        //ver
+        Intent logearse = new Intent(myActivity, Log_in.class);
+        myActivity.startActivity(logearse);
+    }
+    public void parcear(String str){
+        try{
+            JSONObject jsonObject = new JSONObject(str);
+            String mensaje = jsonObject.getString("mensaje");
+            Integer cod = jsonObject.getInt("codigo");
+            modeloRegistro.setCodigo(cod);
+            modeloRegistro.setMensaje(mensaje);
+            Log.d("Mensaje","parceado");
+            validarUsuario();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean handleMessage(Message message) {
+        String resultado;
+        Log.d("Recibendo","Mensaje");
+        resultado= (String) message.obj;
+        parcear(resultado);
+        return false;
+    }
+}
 

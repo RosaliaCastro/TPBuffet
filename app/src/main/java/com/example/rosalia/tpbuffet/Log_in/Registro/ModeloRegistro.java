@@ -12,17 +12,10 @@ public class ModeloRegistro {
     private String mail;
     private String clave;
     private String reingrese;
-    List<ModeloRegistro>ListaRegistrados;
+    private String mensaje;
+    private Integer codigo;
 
     public ModeloRegistro(){}
-
-
-    public List<ModeloRegistro> getLista() {
-        return ListaRegistrados;
-    }
-    public void setListaRegistrados(List<ModeloRegistro>ListaRegistrados){
-        this.ListaRegistrados=ListaRegistrados;
-    }
 
     public ModeloRegistro(String nombre, String apellido,String dni, String mail, String clave, String reingrese){
         this.nombre=nombre;
@@ -31,6 +24,22 @@ public class ModeloRegistro {
         this.mail=mail;
         this.clave= clave;
         this.reingrese=reingrese;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public Integer getCodigo() {
+        return codigo;
     }
 
     public String getNombre() {

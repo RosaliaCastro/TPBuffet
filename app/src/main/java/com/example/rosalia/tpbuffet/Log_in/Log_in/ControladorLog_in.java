@@ -75,7 +75,7 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
 
             if (validarCampo(mail, clave)) { //valida que no esten vacios
                 String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
-                String servicioValidarC="http://192.168.1.36:3000/usuarios/"+mail+"/"+clave;
+                String servicioValidarC="http://127.0.0.1:3000/usuarios/"+mail+"/"+clave;
                 myHiloLo_gin = new MyHiloLo_gin(servicioValidarC, myHandler);
                 Thread hiloDos = new Thread(myHiloLo_gin);
                 hiloDos.start();
