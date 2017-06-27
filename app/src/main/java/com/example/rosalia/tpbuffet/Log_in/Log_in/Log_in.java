@@ -10,6 +10,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
+=======
+import android.support.v7.util.ListUpdateCallback;
+>>>>>>> 19076b02545f5379a4dda5f092b21849957261c0
 import android.util.Log;
 import android.widget.TextView;
 
@@ -21,12 +25,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Log_in extends AppCompatActivity {
+
 private Handler myHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in);
-
         SharedPreferences miPerferencia = getSharedPreferences("miConfig", Context.MODE_PRIVATE);
         ModeloLog_in modeloLog_in = new ModeloLog_in();
         ControladorLog_in controladorLog_in = new ControladorLog_in(modeloLog_in,this,miPerferencia);

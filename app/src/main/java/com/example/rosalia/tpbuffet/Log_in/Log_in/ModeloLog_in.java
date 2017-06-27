@@ -12,6 +12,7 @@ public class ModeloLog_in {
     private String mensaje;
 
     public ModeloLog_in(){}
+
     public ModeloLog_in(String mail, String clave){
         this.mail=mail;
         this.clave=clave;}
@@ -21,6 +22,7 @@ public class ModeloLog_in {
         return codigo;
     }
     public void setCodigo(Integer codigo) {this.codigo = codigo;}
+
     public String getMail() {
         return mail;
     }

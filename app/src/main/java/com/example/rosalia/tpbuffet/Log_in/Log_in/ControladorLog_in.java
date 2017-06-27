@@ -3,9 +3,11 @@ package com.example.rosalia.tpbuffet.Log_in.Log_in;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -28,11 +30,13 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
     private VistaLog_in vistaLog_in;
     SharedPreferences myPreferencia;
     Handler myHandler = new Handler(this);
+
     MyHiloLo_gin myHiloLo_gin;
 
     public ControladorLog_in() {}
 
     public ControladorLog_in(ModeloLog_in modeloLog_in, Activity myActivity, SharedPreferences myPreferencia) {
+
         this.modeloLog_in = modeloLog_in;
         this.myActivity = myActivity;
         this.myPreferencia=myPreferencia;
@@ -42,14 +46,14 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
         this.vistaLog_in = vistaLog_in;
     }
 
-    public void chequearRecordarme(SharedPreferences myPreferencia){
-    String Mail = myPreferencia.getString("Mail","");
-    String Clave = myPreferencia.getString("Clave","");
-    vistaLog_in.mail.setText(Mail);
-    vistaLog_in.clave.setText(Clave);
-        if (Mail != "" && Clave != ""){
-        Intent myIntent = new Intent(myActivity, Menu.class);
-        myActivity.startActivity(myIntent);
+    public void chequearRecordarme(SharedPreferences myPreferencia) {
+        String Mail = myPreferencia.getString("Mail", "");
+        String Clave = myPreferencia.getString("Clave", "");
+        vistaLog_in.mail.setText(Mail);
+        vistaLog_in.clave.setText(Clave);
+        if (Mail != "" && Clave != "") {
+            Intent myIntent = new Intent(myActivity, Menu.class);
+            myActivity.startActivity(myIntent);
         }
     }
 
@@ -73,22 +77,25 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
     public void onClick(View view) {
         MiDialogo dialogo1 = new MiDialogo();
         if (view.getId() == R.id.btnIngresar) {
+
             String mail = vistaLog_in.mail.getText().toString();
             String clave = vistaLog_in.clave.getText().toString();
 
-            if (validarCampo(mail, clave)) { //valida que no esten vacios
+            if (validarCampo(mail, clave))
+            { //valida que no esten vacios
                 String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
                 String servicioValidarC="http://192.168.1.39:3000/usuarios/"+mail+"/"+clave;
                 myHiloLo_gin = new MyHiloLo_gin(servicioValidarC, myHandler);
                 Thread hiloDos = new Thread(myHiloLo_gin);
                 hiloDos.start();
-                } else {
+
+            } else  {
                 dialogo1.show(myActivity.getFragmentManager(), "Alerta1");
                 dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
                 vistaLog_in.limpiar();
-            }
+                    }
 
-        }else if (view.getId() == R.id.btnRegistrarme) {
+        } else if (view.getId() == R.id.btnRegistrarme) {
             Intent intent2 = new Intent(myActivity, Registro.class);
             myActivity.startActivity(intent2);
         }

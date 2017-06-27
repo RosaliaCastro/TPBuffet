@@ -17,6 +17,7 @@ import com.example.rosalia.tpbuffet.R;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,8 +63,6 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
     @Override
     public void onClick(View view) {
         if (view.getId()== R.id.btnRegistrarme2){
-
-
             String nombre = vistaRegistro.nombre.getText().toString();
             String apellido = vistaRegistro.apellido.getText().toString();
             String dni=vistaRegistro.dni.getText().toString();
@@ -75,13 +74,11 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
             {
                 if (validarClave(clave,reingrese)){ //valida que sean iguales
                     String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
-                    String servicioValidarC="http://192.168.1.36:3000/usuarios/"+mail+"/"+clave;
+                    String servicioValidarC="http://192.168.1.39:3000/usuarios/"+mail+"/"+clave;
                     miHilo = new MyHiloLo_gin(servicioValidarC, myHandler);
                     Thread hiloUnoR = new Thread(miHilo);
                     hiloUnoR.start();
-                    dialogo1.show(myActivity.getFragmentManager(),"alerta3");
-                    dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje3));
-                    }else{
+                }else{
                         dialogo1.show(myActivity.getFragmentManager(),"alerta4");
                         dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje4));
                     }
@@ -101,6 +98,7 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
         } else { if(modeloRegistro.getCodigo() == 400 || modeloRegistro.getCodigo() ==500){
             String servicioNuevoF="http://192.168.2.95:3000/usuarios/nuevo";
             String servicioNuevoC="http://192.168.1.36:3000/usuarios/nuevo";
+
             miHilo = new MyHiloLo_gin(servicioNuevoC, myHandler);
             Thread hiloDosR = new Thread(miHilo);
             hiloDosR.start();
@@ -130,9 +128,15 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
 
     @Override
     public boolean handleMessage(Message message) {
-        String resultado;
+        String resultado=null;
         Log.d("Recibendo","Mensaje");
-        resultado= (String) message.obj;
+        byte [] byts= (byte[]) message.obj;
+        try {
+            resultado= new String(byts, "UTF-8");
+            parcear(resultado);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         parcear(resultado);
         return false;
     }
