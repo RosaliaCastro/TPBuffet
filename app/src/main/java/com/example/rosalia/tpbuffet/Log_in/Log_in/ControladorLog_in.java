@@ -121,8 +121,7 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
     }
     public void parcear(String str) throws JSONException {
 
-        JSONObject jsonObject = new JSONObject(str);
-
+        JSONObject jsonObject = new JSONObject(str); //sale el error Cannot evaluate org.json.JSONObject.toString()
         try{
             Integer cod = jsonObject.getInt("codigo");
             String mensaje = jsonObject.getString("mensaje");
@@ -139,7 +138,7 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
 
     @Override
     public boolean handleMessage(Message message) {
-        String resultado;
+        String resultado=null;
         Log.d("Recibendo","Mensaje");
         byte [] byts = (byte[]) message.obj;
         try {
