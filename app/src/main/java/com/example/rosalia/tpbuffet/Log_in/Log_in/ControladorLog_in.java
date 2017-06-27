@@ -14,7 +14,10 @@ import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
 import com.example.rosalia.tpbuffet.Log_in.Registro.Registro;
 import com.example.rosalia.tpbuffet.R;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Jona on 30/04/2017.
@@ -75,7 +78,7 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
 
             if (validarCampo(mail, clave)) { //valida que no esten vacios
                 String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
-                String servicioValidarC="http://127.0.0.1:3000/usuarios/"+mail+"/"+clave;
+                String servicioValidarC="http://192.168.1.39:3000/usuarios/"+mail+"/"+clave;
                 myHiloLo_gin = new MyHiloLo_gin(servicioValidarC, myHandler);
                 Thread hiloDos = new Thread(myHiloLo_gin);
                 hiloDos.start();
@@ -116,11 +119,13 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
             }
         }
     }
-    public void parcear(String str){
+    public void parcear(String str) throws JSONException {
+
+        JSONObject jsonObject = new JSONObject(str);
+
         try{
-            JSONObject jsonObject = new JSONObject(str);
-            String mensaje = jsonObject.getString("mensaje");
             Integer cod = jsonObject.getInt("codigo");
+            String mensaje = jsonObject.getString("mensaje");
             modeloLog_in.setCodigo(cod);
             modeloLog_in.setMensaje(mensaje);
             Log.d("Mensaje","parceado");
@@ -136,8 +141,16 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
     public boolean handleMessage(Message message) {
         String resultado;
         Log.d("Recibendo","Mensaje");
-        resultado= (String) message.obj;
-        parcear(resultado);
+        byte [] byts = (byte[]) message.obj;
+        try {
+            resultado= new String (byts,"UTF-8");
+            parcear(resultado);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         return false;
     }
 
