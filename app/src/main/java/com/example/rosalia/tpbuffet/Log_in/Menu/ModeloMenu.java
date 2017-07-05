@@ -1,15 +1,20 @@
 package com.example.rosalia.tpbuffet.Log_in.Menu;
 
+import android.widget.ImageView;
+
 import java.util.List;
 
 /**
  * Created by Jona on 01/05/2017.
  */
 public class ModeloMenu {
-    private String descripcion;
+    private String nombre;
     private Double precio;
+    private String tipo;
     private Double importe;
     private int elementos;
+    String urlImagen;
+    ImageView imagen;
     List<ModeloMenu>Lista;
 
     public List<ModeloMenu> getListaMenu(){
@@ -24,9 +29,11 @@ public class ModeloMenu {
         this.elementos=elementos;
     }
 
-    public ModeloMenu(String descripcion, Double precio){
-        this.descripcion= descripcion;
+    public ModeloMenu(String tipo, String nombre, Double precio, String urlImagen){
+        this.nombre= nombre;
         this.precio=precio;
+        this.tipo=tipo;
+        this.urlImagen=urlImagen;
     }
     public ModeloMenu(){}
 
@@ -34,12 +41,12 @@ public class ModeloMenu {
         return precio;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public void setPrecio(Double precio) {
@@ -61,4 +68,16 @@ public class ModeloMenu {
     public void setImporte(Double importe) {
         this.importe = importe;
     }
+
+    public String getTipo() {return tipo;}
+
+    public void setTipo(String tipo) {this.tipo = tipo;}
+
+    public String getUrlImagen() {return urlImagen;}
+
+    public void setImagen(String urlImagen) {this.urlImagen = urlImagen;}
+
+    public ImageView getImagen() {return imagen;}
+
+    public void setImagen(ImageView imagen) {this.imagen = imagen;}
 }

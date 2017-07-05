@@ -1,5 +1,7 @@
 package com.example.rosalia.tpbuffet.Log_in;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 
@@ -45,12 +47,18 @@ public class MyConexion {
             throw new IOException();
         }
     }
-    public byte[] posBytes(String strUrl) throws IOException{
+    public byte[] posBytes(String strUrl, Uri.Builder parametros) throws IOException{
 
         URL url = new URL(strUrl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("POST");
-        urlConnection.connect();
+        urlConnection.setDoOutput(true);
+        String query = parametros.build().getEncodedQuery();
+        OutputStream os = urlConnection.getOutputStream();
+        BufferedWriter writer= new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
+        writer.write(query);
+        writer.flush();
+        writer.close();
         int response = urlConnection.getResponseCode();
         if(response == 200)
         {
@@ -69,5 +77,20 @@ public class MyConexion {
         }else{
             throw new IOException();
         }
+    }
+    public Bitmap traerImagen(String url){
+        URL imagUrl=null;
+        Bitmap imagen=null;
+        try {
+            imagUrl=new URL(url);
+            HttpURLConnection conn = (HttpURLConnection)imagUrl.openConnection();
+            conn.connect();
+            imagen= BitmapFactory.decodeStream(conn.getInputStream());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return imagen;
     }
 }

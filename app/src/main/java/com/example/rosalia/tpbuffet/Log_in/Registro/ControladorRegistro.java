@@ -2,6 +2,7 @@ package com.example.rosalia.tpbuffet.Log_in.Registro;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBar;
@@ -74,8 +75,8 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
             {
                 if (validarClave(clave,reingrese)){ //valida que sean iguales
                     String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
-                    String servicioValidarC="http://192.168.1.39:3000/usuarios/"+mail+"/"+clave;
-                    miHilo = new MyHiloLo_gin(servicioValidarC, myHandler);
+                    String servicioValidarC="http://192.168.1.40:3000/usuarios/"+mail+"/"+clave;
+                    miHilo = new MyHiloLo_gin(servicioValidarC, myHandler,1);
                     Thread hiloUnoR = new Thread(miHilo);
                     hiloUnoR.start();
                 }else{
@@ -87,7 +88,6 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
                 dialogo1.setMensaje(myActivity.getResources().getString(R.string.Mensaje1));
             }
 
-            vistaRegistro.limpiar();
         }
     }
     public void validarUsuario() {
@@ -98,15 +98,20 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
         } else { if(modeloRegistro.getCodigo() == 400 || modeloRegistro.getCodigo() ==500){
             String servicioNuevoF="http://192.168.2.95:3000/usuarios/nuevo";
             String servicioNuevoC="http://192.168.1.36:3000/usuarios/nuevo";
-
-            miHilo = new MyHiloLo_gin(servicioNuevoC, myHandler);
+            Uri.Builder parametro = new Uri.Builder();
+            parametro.appendQueryParameter("nombre", vistaRegistro.nombre.getText().toString());
+            parametro.appendQueryParameter("apellido", vistaRegistro.apellido.getText().toString());
+            parametro.appendQueryParameter("dni", vistaRegistro.dni.getText().toString());
+            parametro.appendQueryParameter("mail", vistaRegistro.mail.getText().toString());
+            parametro.appendQueryParameter("clave", vistaRegistro.clave.getText().toString());
+            miHilo = new MyHiloLo_gin(servicioNuevoC, myHandler,parametro,2);
             Thread hiloDosR = new Thread(miHilo);
             hiloDosR.start();
+            //que me devuelve para saber que lo agrego
             }
         }
     }
     public void nuevo(){
-        //ver
         Intent logearse = new Intent(myActivity, Log_in.class);
         myActivity.startActivity(logearse);
     }
@@ -131,13 +136,24 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
         String resultado=null;
         Log.d("Recibendo","Mensaje");
         byte [] byts= (byte[]) message.obj;
-        try {
-            resultado= new String(byts, "UTF-8");
+        if (message.arg1==1){
+
+            try {
+                resultado= new String(byts, "UTF-8");
+                parcear(resultado);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
             parcear(resultado);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        }else {
+            try {
+                resultado= new String(byts, "UTF-8");
+                parcear(resultado);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
         }
-        parcear(resultado);
+
         return false;
     }
 }

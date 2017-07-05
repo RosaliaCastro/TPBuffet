@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.example.rosalia.tpbuffet.Log_in.Pedido.Pedido;
 import com.example.rosalia.tpbuffet.R;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,26 +48,12 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
-
+        RecyclerView list = (RecyclerView)findViewById(R.id.list);
         ModeloMenu modeloMenu1 = new ModeloMenu();
         ControladorMenu controladorMenu = new ControladorMenu(modeloMenu1, this);
         VistaMenu vistaMenu = new VistaMenu(modeloMenu1, controladorMenu, this);
         controladorMenu.setVistaMenu(vistaMenu);
-
-        List<ModeloMenu> lista = new ArrayList<ModeloMenu>();
-        lista.add(new ModeloMenu("porcion de pizza", 15.50));
-        lista.add(new ModeloMenu("porcion de tarta", 15.50));
-        lista.add(new ModeloMenu("Sandwith de miga", 15.50));
-        lista.add(new ModeloMenu("Porcion de tortilla", 15.50));
-        lista.add(new ModeloMenu("porcion de torta", 15.50));
-        lista.add(new ModeloMenu("Sandwith de milanesa", 15.50));
-        lista.add(new ModeloMenu("Tostado", 15.50));
-        lista.add(new ModeloMenu("Medialuna", 15.50));
-        modeloMenu1.setListaMenu(lista);
-
-        RecyclerView list = (RecyclerView)findViewById(R.id.list);
-        controladorMenu.cargarRecycler(list, lista);
-
+        controladorMenu.cargarRecycler(list);
     }
 
 }

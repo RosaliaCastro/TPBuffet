@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rosalia.tpbuffet.Log_in.Log_in.ControladorLog_in;
@@ -17,6 +18,7 @@ import com.example.rosalia.tpbuffet.R;
 public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView txtDescripcion;
     TextView txtPrecio;
+    ImageView imagen;
     private MyOnItemClick listener;
     private int position;
 
@@ -24,6 +26,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClic
         super(itemView);
         txtDescripcion=(TextView)itemView.findViewById(R.id.txtDescripcion);
         txtPrecio=(TextView)itemView.findViewById(R.id.txtPrecio);
+        imagen=(ImageView)itemView.findViewById(R.id.imagen);
         itemView.setOnClickListener(this);
         this.listener=listener;
     }
