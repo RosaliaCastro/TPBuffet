@@ -28,8 +28,8 @@ import java.util.List;
  * Created by Jona on 01/05/2017.
  */
 public class ControladorMenu implements View.OnClickListener, MyOnItemClick, Handler.Callback {
-    private String servicioLista="http://192.168.1.40:3000/usuarios/productos";
-    private int opcion=1;
+    private String servicioLista="http://192.168.1.40:3000/productos";
+    private int opcion=3;
     Handler myHandler = new Handler(this);
     ModeloMenu modeloMenu;
     Activity myActivity;
@@ -73,7 +73,7 @@ public class ControladorMenu implements View.OnClickListener, MyOnItemClick, Han
                 Intent enviar= new Intent(myActivity,Pedido.class);
                 myActivity.startActivity(enviar);
             }else{
-                dialogo.show(myActivity.getFragmentManager(),"slerta6");
+                dialogo.show(myActivity.getFragmentManager(),"alerta6");
                 dialogo.setMensaje(myActivity.getResources().getString(R.string.Mensaje6));
             }
         }
@@ -101,17 +101,16 @@ public class ControladorMenu implements View.OnClickListener, MyOnItemClick, Han
             cargarVista(txtPrecio);
     }
     public void parcear(String mensaje){
-        List<ModeloMenu> ListProductos = null;
+        List<ModeloMenu> ListProductos = new ArrayList<>();
         try {
-            JSONObject jsonObject= new JSONObject();
-            JSONArray productos= jsonObject.getJSONArray(String.valueOf(mensaje));
+
+            JSONArray productos= new JSONArray(mensaje);
             for (int i =0; i<productos.length();i++){
                 JSONObject producto = productos.getJSONObject(i);
                 modeloMenu.setTipo(producto.getString("tipoMenu"));
                 modeloMenu.setNombre(producto.getString("nombre"));
                 modeloMenu.setPrecio(producto.getDouble("precio"));
-                modeloMenu.setImagen(producto.getString("imagen"));
-
+                modeloMenu.setUrlImagen(producto.getString("imagen"));
                 ListProductos.add(modeloMenu);
             }
             cargarAdapter(ListProductos);
@@ -127,13 +126,8 @@ public class ControladorMenu implements View.OnClickListener, MyOnItemClick, Han
         //recibo la Lista por GET
         String mensaje= null;
         if (message.arg1==1){
-            byte[] byts = (byte[])message.obj;
-            try {
-                mensaje= new String (byts, "UTF-8");
-                parcear(mensaje);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+           mensaje= String.valueOf(message.obj);
+           parcear(mensaje);
         }
         return false;
     }

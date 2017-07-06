@@ -14,6 +14,7 @@ import com.example.rosalia.tpbuffet.Log_in.Log_in.Log_in;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.MiDialogo;
 import com.example.rosalia.tpbuffet.Log_in.Log_in.ModeloLog_in;
 import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
+import com.example.rosalia.tpbuffet.Log_in.Pedido.Dialogo;
 import com.example.rosalia.tpbuffet.R;
 
 import org.json.JSONObject;
@@ -97,7 +98,7 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
             vistaRegistro.limpiar();
         } else { if(modeloRegistro.getCodigo() == 400 || modeloRegistro.getCodigo() ==500){
             String servicioNuevoF="http://192.168.2.95:3000/usuarios/nuevo";
-            String servicioNuevoC="http://192.168.1.36:3000/usuarios/nuevo";
+            String servicioNuevoC="http://192.168.1.40:3000/usuarios/nuevo";
             Uri.Builder parametro = new Uri.Builder();
             parametro.appendQueryParameter("nombre", vistaRegistro.nombre.getText().toString());
             parametro.appendQueryParameter("apellido", vistaRegistro.apellido.getText().toString());
@@ -107,10 +108,10 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
             miHilo = new MyHiloLo_gin(servicioNuevoC, myHandler,parametro,2);
             Thread hiloDosR = new Thread(miHilo);
             hiloDosR.start();
-            //que me devuelve para saber que lo agrego
             }
         }
     }
+
     public void nuevo(){
         Intent logearse = new Intent(myActivity, Log_in.class);
         myActivity.startActivity(logearse);
@@ -137,21 +138,21 @@ public class ControladorRegistro implements View.OnClickListener, Handler.Callba
         Log.d("Recibendo","Mensaje");
         byte [] byts= (byte[]) message.obj;
         if (message.arg1==1){
+            try {
+                resultado= new String(byts, "UTF-8");
+                parcear(resultado);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }else if(message.arg1==2) {
+            resultado= String.valueOf(message.obj);
+            if(resultado=="true"){
+                Dialogo dialogo= new Dialogo();
+                dialogo.show(myActivity.getFragmentManager(),"notificacion");
+                dialogo.setMensaje("Registro exitoso");
+                nuevo();
+            }
 
-            try {
-                resultado= new String(byts, "UTF-8");
-                parcear(resultado);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            parcear(resultado);
-        }else {
-            try {
-                resultado= new String(byts, "UTF-8");
-                parcear(resultado);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
         }
 
         return false;

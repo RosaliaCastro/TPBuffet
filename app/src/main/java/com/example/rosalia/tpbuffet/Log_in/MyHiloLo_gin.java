@@ -46,6 +46,7 @@ public class MyHiloLo_gin implements Runnable {
     public void run() {
         Message mensaje = new Message();
         byte[] informacion= null;
+        String listado=null;
         Bitmap dato= null;
         MyConexion myConexion = new MyConexion();
         try{
@@ -57,19 +58,30 @@ public class MyHiloLo_gin implements Runnable {
                     mensaje.obj=informacion;
                     break;
                 case 2:
-                    informacion=myConexion.posBytes(ruta, parametro);
-                    Log.d("se ejecuto", "la conexion");
-                    mensaje.arg1=2;
-                    mensaje.obj=informacion;
+                    String res=null;
+                    if( myConexion.posBytes(ruta, parametro)){
+                        res="true";
+                        mensaje.arg1=2;
+                        mensaje.obj=res;
+                    }else{
+                        res="false";
+                        mensaje.arg1=2;
+                        mensaje.obj=res;
+                    }
                     break;
                 case 3:
+                    listado=myConexion.getListado(ruta);
+                    mensaje.arg1=1;
+                    mensaje.obj=listado;
+                    break;
+                case 4:
                     //Nos conectamos a internet para descargar las imagenes.
                     if(ContextCompat.checkSelfPermission(myActivity, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED ){
-                    dato=myConexion.traerImagen(ruta);
-
+                        dato=myConexion.traerImagen(ruta);
+                        mensaje.arg1=1;
+                        mensaje.obj=dato;
                     }
-
-
+                    break;
             }
 
                 myHandler.sendMessage(mensaje);

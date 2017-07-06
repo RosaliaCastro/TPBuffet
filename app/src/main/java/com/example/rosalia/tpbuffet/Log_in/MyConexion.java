@@ -47,36 +47,26 @@ public class MyConexion {
             throw new IOException();
         }
     }
-    public byte[] posBytes(String strUrl, Uri.Builder parametros) throws IOException{
-
-        URL url = new URL(strUrl);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.setRequestMethod("POST");
-        urlConnection.setDoOutput(true);
-        String query = parametros.build().getEncodedQuery();
-        OutputStream os = urlConnection.getOutputStream();
-        BufferedWriter writer= new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
-        writer.write(query);
-        writer.flush();
-        writer.close();
-        int response = urlConnection.getResponseCode();
-        if(response == 200)
-        {
-            InputStream is = urlConnection.getInputStream();
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-            byte[] buffer = new byte[1024];
-            int lenght = 0;
-            while((lenght = is.read(buffer)) != -1)
-            {
-                baos.write(buffer,0,lenght);
-            }
-            is.close();
-            return baos.toByteArray();
-
-        }else{
-            throw new IOException();
+    public boolean posBytes(String strUrl, Uri.Builder parametros) throws IOException{
+        boolean res;
+        try {
+            URL url = new URL(strUrl);
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            String query = parametros.build().getEncodedQuery();
+            OutputStream os = urlConnection.getOutputStream();
+            BufferedWriter writer= new BufferedWriter(new OutputStreamWriter(os,"UTF-8"));
+            writer.write(query);
+            writer.flush();
+            writer.close();
+            res=true;
+            }catch (IOException ex){
+            ex.printStackTrace();
+            res=false;
         }
+        return res;
+
     }
     public Bitmap traerImagen(String url){
         URL imagUrl=null;
@@ -92,5 +82,30 @@ public class MyConexion {
             e.printStackTrace();
         }
         return imagen;
+    }
+    public String getListado(String strUrl) throws IOException{
+
+        URL url = new URL(strUrl);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("GET");
+        urlConnection.connect();
+        int response = urlConnection.getResponseCode();
+        if(response == 200)
+        {
+            InputStream is = urlConnection.getInputStream();
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            byte[] buffer = new byte[1024];
+            int lenght = 0;
+            while((lenght = is.read(buffer)) != -1)
+            {
+                baos.write(buffer,0,lenght);
+            }
+            is.close();
+            return new String(baos.toByteArray());
+
+        }else{
+            throw new IOException();
+        }
     }
 }

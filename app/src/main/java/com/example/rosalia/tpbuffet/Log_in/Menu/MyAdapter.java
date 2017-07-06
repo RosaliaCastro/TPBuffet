@@ -24,7 +24,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Han
     private List<ModeloMenu> lista;
     private MyOnItemClick listener;
     Handler myHandler = new Handler(this);
-    int opcion=3;
+    int opcion=4;
     private Activity myActivity;
 
 
@@ -46,16 +46,15 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Han
         ModeloMenu menu=lista.get(position);
         holder.txtDescripcion.setText(menu.getNombre());
         holder.txtPrecio.setText(menu.getPrecio().toString());
-        if(lista.size()>0){
+        if(menu.getImagen()== null){
             String url = lista.get(position).getUrlImagen();
             MyHiloLo_gin miHilo= new MyHiloLo_gin(url,myHandler,position,myActivity);
             Thread hilo = new Thread(miHilo);
             hilo.start();
+        }else{
+            holder.imagen.setImageBitmap(menu.getImagen());
         }
-
         holder.setPosition(position);
-
-
     }
 
     @Override
@@ -66,11 +65,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Han
 
     @Override
     public boolean handleMessage(Message message) {
-        ImageView imag = null;
         byte [] bytes= (byte[]) message.obj;
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
-        imag.setImageBitmap(bitmap);
-
+        lista.get(message.arg1).setImagen(bitmap);
+        this.notifyDataSetChanged();
         return false;
     }
 

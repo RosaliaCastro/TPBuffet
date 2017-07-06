@@ -1,5 +1,6 @@
 package com.example.rosalia.tpbuffet.Log_in.Menu;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ModeloMenu {
     private Double importe;
     private int elementos;
     String urlImagen;
-    ImageView imagen;
+    private Bitmap imagen;
     List<ModeloMenu>Lista;
 
     public List<ModeloMenu> getListaMenu(){
@@ -75,9 +76,9 @@ public class ModeloMenu {
 
     public String getUrlImagen() {return urlImagen;}
 
-    public void setImagen(String urlImagen) {this.urlImagen = urlImagen;}
+    public void setUrlImagen(String urlImagen) {this.urlImagen = urlImagen;}
 
-    public ImageView getImagen() {return imagen;}
+    public Bitmap getImagen() {return imagen;}
 
-    public void setImagen(ImageView imagen) {this.imagen = imagen;}
+    public void setImagen(Bitmap imagen) {this.imagen = imagen;}
 }
