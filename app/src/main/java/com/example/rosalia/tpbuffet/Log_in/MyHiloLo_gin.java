@@ -13,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Jona on 20/06/2017.
@@ -22,7 +23,7 @@ public class MyHiloLo_gin implements Runnable {
     private Handler myHandler;
     private int opcion=0;
     private Uri.Builder parametro;
-    private Activity myActivity;
+    private List<Uri.Builder> pedido;
 
     public MyHiloLo_gin (String ruta,Handler myHandler, int opcion){
         this.ruta=ruta;
@@ -35,52 +36,37 @@ public class MyHiloLo_gin implements Runnable {
         this.parametro=paramatro;
         this.opcion=opcion;
     }
-    public MyHiloLo_gin (String ruta, Handler myHandler, int opcion, Activity myActivity){
-        this.ruta=ruta;
-        this.myHandler=myHandler;
-        this.opcion=opcion;
-        this.myActivity=myActivity;
-    }
+    //public MyHiloLo_gin(String ruta, Handler myHandler, List<Uri.Builder> pedido, int opcion){
+      //  this.ruta=ruta;
+        //this.myHandler=myHandler;
+        //this.pedido=pedido;
+        //this.opcion=opcion;
+    //}
+
 
     @Override
     public void run() {
         Message mensaje = new Message();
         byte[] informacion= null;
         String listado=null;
-        Bitmap dato= null;
         MyConexion myConexion = new MyConexion();
         try{
             switch (opcion){
                 case 1:
-                    informacion=myConexion.getBytesDateByGET(ruta);
-                    Log.d("se ejecuto","la conexion");
-                    mensaje.arg1=1;
-                    mensaje.obj=informacion;
+                        informacion=myConexion.traerDatos(ruta);
+                        Log.d("se ejecuto","la conexion");
+                        mensaje.arg1=1;
+                        mensaje.obj=informacion;
                     break;
                 case 2:
-                    String res=null;
-                    if( myConexion.posBytes(ruta, parametro)){
-                        res="true";
+                        informacion=myConexion.posBytes(ruta, parametro);
                         mensaje.arg1=2;
-                        mensaje.obj=res;
-                    }else{
-                        res="false";
-                        mensaje.arg1=2;
-                        mensaje.obj=res;
-                    }
+                        mensaje.obj=informacion;
                     break;
                 case 3:
-                    listado=myConexion.getListado(ruta);
-                    mensaje.arg1=1;
-                    mensaje.obj=listado;
-                    break;
-                case 4:
-                    //Nos conectamos a internet para descargar las imagenes.
-                    if(ContextCompat.checkSelfPermission(myActivity, Manifest.permission.INTERNET)!= PackageManager.PERMISSION_GRANTED ){
-                        dato=myConexion.traerImagen(ruta);
+                        listado=myConexion.getListado(ruta);
                         mensaje.arg1=1;
-                        mensaje.obj=dato;
-                    }
+                        mensaje.obj=listado;
                     break;
             }
 

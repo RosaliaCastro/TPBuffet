@@ -48,7 +48,7 @@ public class Dialogo extends DialogFragment {
     }
 
 
-    public String getMensaje() {
+    public String getMensaje(String string) {
         return mensaje;
     }
 

@@ -51,4 +51,5 @@
     <string name="MensajeTitulo1">Alerta!!</string>
     <string name="MensajeImporte">Importe Total: </string>
     <string name="MensajeCantidad">Cantidad de Elementos: </string>
+    <string name="Mensaje7">Se produjo un error, vuelva a intentarlo</string>
 </resources>

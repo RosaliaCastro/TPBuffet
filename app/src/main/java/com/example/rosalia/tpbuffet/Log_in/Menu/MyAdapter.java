@@ -12,26 +12,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
+import com.example.rosalia.tpbuffet.Log_in.Servicios;
 import com.example.rosalia.tpbuffet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Jona on 02/05/2017.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Handler.Callback {
-
     private List<ModeloMenu> lista;
     private MyOnItemClick listener;
     Handler myHandler = new Handler(this);
-    int opcion=4;
-    private Activity myActivity;
+    int opcion=1;
+
+    public List<ModeloMenu> getLista() {
+        return lista;
+    }
+
+    public void setLista(List<ModeloMenu> lista){
+        this.lista=lista;
+    }
 
 
-    public MyAdapter (List<ModeloMenu> lista, MyOnItemClick listener,Activity myActivity){
+    public MyAdapter (List<ModeloMenu> lista, MyOnItemClick listener){
             this.lista=lista;
             this.listener=listener;
-            this.myActivity=myActivity;
     }
 
     @Override
@@ -46,14 +53,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Han
         ModeloMenu menu=lista.get(position);
         holder.txtDescripcion.setText(menu.getNombre());
         holder.txtPrecio.setText(menu.getPrecio().toString());
-        if(menu.getImagen()== null){
-            String url = lista.get(position).getUrlImagen();
-            MyHiloLo_gin miHilo= new MyHiloLo_gin(url,myHandler,position,myActivity);
-            Thread hilo = new Thread(miHilo);
-            hilo.start();
-        }else{
-            holder.imagen.setImageBitmap(menu.getImagen());
-        }
+        holder.imagen.setImageBitmap(menu.getImagen());
+        traerImagen(lista.get(position).getUrlImagen());
         holder.setPosition(position);
     }
 
@@ -70,6 +71,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> implements Han
         lista.get(message.arg1).setImagen(bitmap);
         this.notifyDataSetChanged();
         return false;
+    }
+    public void traerImagen(String url){
+        MyHiloLo_gin miHilo= new MyHiloLo_gin(url,myHandler,opcion);
+        Thread hilo = new Thread(miHilo);
+        hilo.start();
     }
 
 }

@@ -48,4 +48,5 @@
     <string name="MensajeFinal">The order was sent</string>
     <string name="MensajeImporte">Total: </string>
     <string name="MensajeCantidad">Number de elements: </string>
+    <string name="Mensaje7">An error occurred, please try again</string>
 </resources>

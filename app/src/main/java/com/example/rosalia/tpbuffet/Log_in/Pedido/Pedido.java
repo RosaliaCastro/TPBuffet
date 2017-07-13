@@ -49,25 +49,13 @@ public class Pedido extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pedido);
-
         ModeloPedido modeloPedido = new ModeloPedido();
         ControladorPedido controladorPedido = new ControladorPedido(modeloPedido, this);
         VistaPedido vistaPedido = new VistaPedido(modeloPedido, controladorPedido, this);
         controladorPedido.setVistaPedido(vistaPedido);
         controladorPedido1=controladorPedido;
-
-        List<ModeloPedido> listaPedido = new ArrayList<ModeloPedido>();
-        listaPedido.add(new ModeloPedido("porcion de pizza", 15.50));
-        listaPedido.add(new ModeloPedido("porcion de tarta", 15.50));
-        listaPedido.add(new ModeloPedido("Sandwith de miga", 15.50));
-        listaPedido.add(new ModeloPedido("Porcion de tortilla", 15.50));
-        listaPedido.add(new ModeloPedido("porcion de torta", 15.50));
-        listaPedido.add(new ModeloPedido("Sandwith de milanesa", 15.50));
-        modeloPedido.setListaPedido(listaPedido);
-
         RecyclerView list2 = (RecyclerView) findViewById(R.id.list2);
-        controladorPedido.cargarRecycler(list2, listaPedido);
-        controladorPedido.cargar();
+        controladorPedido.cargarRecycler(list2);
 
     }
 }

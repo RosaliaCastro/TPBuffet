@@ -2,6 +2,7 @@ package com.example.rosalia.tpbuffet.Log_in.Pedido;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.rosalia.tpbuffet.Log_in.Menu.MyOnItemClick;
@@ -13,6 +14,7 @@ import com.example.rosalia.tpbuffet.R;
 public class MyViewHolderPedido extends RecyclerView.ViewHolder implements View.OnClickListener {
     TextView txtDescripcionPedido;
     TextView txtPrecioPedido;
+    ImageView imagen;
     private MyOnItemClick listener;
     private int position;
 
@@ -20,9 +22,9 @@ public class MyViewHolderPedido extends RecyclerView.ViewHolder implements View.
         super(itemView);
         txtDescripcionPedido=(TextView)itemView.findViewById(R.id.txtDescripcionPedido);
         txtPrecioPedido=(TextView)itemView.findViewById(R.id.txtPrecioPedido);
+        imagen=(ImageView)itemView.findViewById(R.id.imagenPedido);
         itemView.setOnClickListener(this);
         this.listener=listener;
-
     }
 
     @Override

@@ -11,6 +11,7 @@
         <ImageView
             android:layout_width="75dp"
             android:layout_height="75dp"
+            android:id="@+id/imagenPedido"
             android:src="@drawable/pizzapng"/>
         <LinearLayout
             android:layout_width="match_parent"

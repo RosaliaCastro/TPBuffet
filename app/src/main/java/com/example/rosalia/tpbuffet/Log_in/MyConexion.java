@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -22,7 +23,7 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class MyConexion {
 
-    public byte[] getBytesDateByGET(String strUrl) throws IOException{
+    public byte[] traerDatos(String strUrl) throws IOException{
 
         URL url = new URL(strUrl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -47,9 +48,8 @@ public class MyConexion {
             throw new IOException();
         }
     }
-    public boolean posBytes(String strUrl, Uri.Builder parametros) throws IOException{
-        boolean res;
-        try {
+    public byte[] posBytes(String strUrl, Uri.Builder parametros) throws IOException{
+
             URL url = new URL(strUrl);
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("POST");
@@ -60,29 +60,27 @@ public class MyConexion {
             writer.write(query);
             writer.flush();
             writer.close();
-            res=true;
-            }catch (IOException ex){
-            ex.printStackTrace();
-            res=false;
-        }
-        return res;
+            int response = urlConnection.getResponseCode();
+            if(response == 200)
+            {
+                InputStream is = urlConnection.getInputStream();
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
+                byte[] buffer = new byte[1024];
+                int lenght = 0;
+                while((lenght = is.read(buffer)) != -1)
+                {
+                    baos.write(buffer,0,lenght);
+                }
+                is.close();
+                return baos.toByteArray();
+
+            }else{
+                throw new IOException();
+            }
     }
-    public Bitmap traerImagen(String url){
-        URL imagUrl=null;
-        Bitmap imagen=null;
-        try {
-            imagUrl=new URL(url);
-            HttpURLConnection conn = (HttpURLConnection)imagUrl.openConnection();
-            conn.connect();
-            imagen= BitmapFactory.decodeStream(conn.getInputStream());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return imagen;
-    }
+
+
     public String getListado(String strUrl) throws IOException{
 
         URL url = new URL(strUrl);
@@ -108,4 +106,5 @@ public class MyConexion {
             throw new IOException();
         }
     }
+
 }

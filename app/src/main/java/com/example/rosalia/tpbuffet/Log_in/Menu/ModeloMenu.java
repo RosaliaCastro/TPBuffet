@@ -17,6 +17,7 @@ public class ModeloMenu {
     String urlImagen;
     private Bitmap imagen;
     List<ModeloMenu>Lista;
+    private String mensaje;
 
     public List<ModeloMenu> getListaMenu(){
         return Lista;
@@ -81,4 +82,12 @@ public class ModeloMenu {
     public Bitmap getImagen() {return imagen;}
 
     public void setImagen(Bitmap imagen) {this.imagen = imagen;}
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+
+    public String getMensaje() {
+        return mensaje;
+    }
 }

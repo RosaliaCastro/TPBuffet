@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import com.example.rosalia.tpbuffet.Log_in.Menu.Menu;
 import com.example.rosalia.tpbuffet.Log_in.MyHiloLo_gin;
 import com.example.rosalia.tpbuffet.Log_in.Registro.Registro;
+import com.example.rosalia.tpbuffet.Log_in.Servicios;
 import com.example.rosalia.tpbuffet.R;
 
 import org.json.JSONException;
@@ -25,6 +26,7 @@ import java.io.UnsupportedEncodingException;
  * Created by Jona on 30/04/2017.
  */
 public class ControladorLog_in implements View.OnClickListener, Handler.Callback {
+    Servicios rutaLogin= new Servicios();
     private ModeloLog_in modeloLog_in;
     private Activity myActivity;
     private VistaLog_in vistaLog_in;
@@ -83,8 +85,7 @@ public class ControladorLog_in implements View.OnClickListener, Handler.Callback
 
             if (validarCampo(mail, clave))
             { //valida que no esten vacios
-                String servicioValidarF="http://192.168.2.95:3000/usuarios/"+mail+"/"+clave;
-                String servicioValidarC="http://192.168.1.40:3000/usuarios/"+mail+"/"+clave;
+                String servicioValidarC=rutaLogin.getRutaLogin()+mail+"/"+clave;
                 myHiloLo_gin = new MyHiloLo_gin(servicioValidarC, myHandler,1);
                 Thread hiloDos = new Thread(myHiloLo_gin);
                 hiloDos.start();
